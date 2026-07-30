@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>911 GT3 RS — Engineered for the Track. Built for the Road.</title>
+<meta name="description" content="Every curve honed in the wind tunnel. Every gram accounted for. The 911 GT3 RS channels four decades of motorsport dominance into the most focused road car ever built.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ══════════════ PRELOADER ══════════════ -->
+<div class="preloader" id="preloader">
+  <div class="preloader__inner">
+    <div class="preloader__mark">GT3<span>·</span>RS</div>
+    <div class="preloader__bar"><span id="preloaderFill"></span></div>
+    <div class="preloader__count"><span id="preloaderNum">0</span>%</div>
+  </div>
+</div>
+
+<!-- ══════════════ CURSOR ══════════════ -->
+<div class="cursor" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"><span class="cursor-ring__label" id="cursorLabel"></span></div>
+
+<!-- ══════════════ SCROLL PROGRESS ══════════════ -->
+<div class="scroll-progress"><span id="scrollProgress"></span></div>
+
+<!-- ══════════════ GRAIN ══════════════ -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ══════════════ NAV ══════════════ -->
+<nav class="site-nav" id="siteNav">
+  <a href="#hero" class="brand" data-cursor="link">GT3<span class="brand__dot">·</span>RS</a>
+
+  <div class="nav-links" id="navLinks">
+    <a href="#hero"        class="nav-link is-active" data-cursor="link"><span>Home</span></a>
+    <a href="#performance" class="nav-link" data-cursor="link"><span>Performance</span></a>
+    <a href="#gallery"     class="nav-link" data-cursor="link"><span>Gallery</span></a>
+    <a href="#specs"       class="nav-link" data-cursor="link"><span>Specs</span></a>
+    <a href="#features"    class="nav-link" data-cursor="link"><span>Engineering</span></a>
+    <a href="#contact"     class="nav-link" data-cursor="link"><span>Contact</span></a>
+    <span class="nav-links__indicator" id="navIndicator"></span>
+  </div>
+
+  <a href="#specs" class="nav-cta magnetic" data-cursor="link">Configure</a>
+
+  <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══════════════ MOBILE MENU ══════════════ -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#hero">Home</a>
+  <a href="#performance">Performance</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#specs">Specs</a>
+  <a href="#features">Engineering</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<main>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section id="hero" class="hero" data-screen-label="Hero">
+  <div class="hero__grid" aria-hidden="true"></div>
+  <div class="hero__glow" id="heroGlow" aria-hidden="true"></div>
+
+  <div class="streaks" aria-hidden="true">
+    <i style="top:20%;width:40%;--c:rgba(217,4,41,.6);animation-duration:6s"></i>
+    <i style="top:34%;width:22%;--c:rgba(255,255,255,.18);animation-duration:9s;animation-delay:1.2s"></i>
+    <i style="top:48%;width:30%;--c:rgba(255,255,255,.3);animation-duration:8s;animation-delay:2s"></i>
+    <i style="top:62%;width:26%;--c:rgba(217,4,41,.35);animation-duration:7.5s;animation-delay:3.1s"></i>
+    <i style="top:70%;width:35%;--c:rgba(217,4,41,.4);animation-duration:7s;animation-delay:4s"></i>
+  </div>
+
+  <div class="hero__content">
+    <div class="badge reveal" data-reveal="up">
+      <span class="badge__pulse"></span>Motorsport Heritage
+    </div>
+
+    <h1 class="hero__title" data-split>Engineered for the Track. Built for the Road.</h1>
+
+    <p class="hero__lede reveal" data-reveal="up" data-delay="120">
+      Every curve honed in the wind tunnel. Every gram accounted for. The 911 GT3 RS channels
+      four decades of motorsport dominance into the most focused road car Porsche has ever built.
+    </p>
+
+    <div class="hero__actions reveal" data-reveal="up" data-delay="220">
+      <a href="#performance" class="btn btn--primary magnetic" data-cursor="link">
+        <span>Explore the GT3 RS</span>
+      </a>
+      <a href="#specs" class="btn btn--ghost magnetic" data-cursor="link">
+        <span>Configure Yours</span>
+      </a>
+    </div>
+
+    <div class="hero__mini reveal" data-reveal="up" data-delay="320">
+      <div><b data-count="518">0</b><i>HP</i></div>
+      <div><b data-count="3.0" data-decimals="1">0</b><i>0–60 s</i></div>
+      <div><b data-count="184">0</b><i>MPH</i></div>
+    </div>
+  </div>
+
+  <div class="hero__stage" id="heroStage">
+    <div class="hero__shadow" aria-hidden="true"></div>
+    <div class="slot slot--hero" data-slot="hero-car"
+         data-label="Photorealistic Porsche 911 GT3 RS — 3/4 front, dark studio, red rim light"></div>
+  </div>
+
+  <div class="hero__scroll">
+    <span>Scroll</span>
+    <div class="hero__scroll-line"></div>
+  </div>
+</section>
+
+<!-- ══════════════ MARQUEE ══════════════ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>4.0L Flat-6</span><b>·</b><span>9 000 RPM</span><b>·</b><span>860 kg Downforce</span><b>·</b>
+    <span>Rear-Axle Steering</span><b>·</b><span>Center-Lock Forged</span><b>·</b><span>Naturally Aspirated</span><b>·</b>
+    <span>4.0L Flat-6</span><b>·</b><span>9 000 RPM</span><b>·</b><span>860 kg Downforce</span><b>·</b>
+    <span>Rear-Axle Steering</span><b>·</b><span>Center-Lock Forged</span><b>·</b><span>Naturally Aspirated</span><b>·</b>
+  </div>
+</div>
+
+<!-- ══════════════ PERFORMANCE ══════════════ -->
+<section id="performance" class="section" data-screen-label="Performance">
+  <header class="section__head">
+    <div class="eyebrow reveal" data-reveal="up">By The Numbers</div>
+    <h2 class="section__title" data-split>Pure, Uncompromising Performance</h2>
+  </header>
+
+  <div class="stats" id="stats"><!-- injected --></div>
+</section>
+
+<!-- ══════════════ GALLERY ══════════════ -->
+<section id="gallery" class="section section--alt" data-screen-label="Gallery">
+  <header class="section__head">
+    <div class="eyebrow reveal" data-reveal="up">Gallery</div>
+    <h2 class="section__title" data-split>Every Angle, Every Detail</h2>
+  </header>
+
+  <div class="gallery" id="gallery"><!-- injected --></div>
+</section>
+
+<!-- ══════════════ SPECS ══════════════ -->
+<section id="specs" class="section" data-screen-label="Specs">
+  <div class="specs">
+    <div class="specs__media reveal" data-reveal="left">
+      <div class="slot slot--tall tilt" data-slot="specs-car"
+           data-label="GT3 RS full side profile, dramatic studio lighting"></div>
+      <div class="specs__badge"><b>911</b><i>GT3 RS</i></div>
+    </div>
+
+    <div class="specs__body">
+      <div class="eyebrow reveal" data-reveal="up">Specifications</div>
+      <h2 class="section__title section__title--left" data-split>Precision, By The Numbers</h2>
+      <div class="spec-rows" id="specRows"><!-- injected --></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FEATURES ══════════════ -->
+<section id="features" class="section section--alt" data-screen-label="Features">
+  <header class="section__head">
+    <div class="eyebrow reveal" data-reveal="up">Engineering</div>
+    <h2 class="section__title" data-split>Built From The Track Up</h2>
+  </header>
+
+  <div class="features" id="features-list"><!-- injected --></div>
+</section>
+
+<!-- ══════════════ CTA ══════════════ -->
+<section id="cta" class="cta" data-screen-label="CTA">
+  <div class="cta__bg">
+    <div class="slot slot--bare" data-slot="cta-bg" data-label="Blurred GT3 RS silhouette, red rim lighting"></div>
+  </div>
+  <div class="cta__wash"></div>
+  <div class="cta__inner">
+    <h2 class="cta__title" data-split>Experience Pure Performance.</h2>
+    <p class="reveal" data-reveal="up" data-delay="100">
+      Reserve a private test drive at your nearest showroom and feel four decades of racing
+      pedigree from behind the wheel.
+    </p>
+    <a href="#contact" class="btn btn--primary btn--lg magnetic reveal" data-reveal="up" data-delay="200" data-cursor="link">
+      <span>Book a Test Drive</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer id="contact" class="footer" data-screen-label="Footer">
+  <div class="footer__grid">
+    <div>
+      <div class="brand brand--footer">GT3<span class="brand__dot">·</span>RS</div>
+      <p class="footer__blurb">Precision engineering meets uncompromising performance — the pinnacle
+        of naturally aspirated motorsport technology.</p>
+      <div class="socials">
+        <a href="#" data-cursor="link" aria-label="X">X</a>
+        <a href="#" data-cursor="link" aria-label="Instagram">IG</a>
+        <a href="#" data-cursor="link" aria-label="YouTube">YT</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="footer__h">Navigate</div>
+      <a href="#hero" class="footer__link" data-cursor="link">Home</a>
+      <a href="#performance" class="footer__link" data-cursor="link">Performance</a>
+      <a href="#gallery" class="footer__link" data-cursor="link">Gallery</a>
+      <a href="#specs" class="footer__link" data-cursor="link">Specs</a>
+      <a href="#features" class="footer__link" data-cursor="link">Engineering</a>
+      <a href="#contact" class="footer__link" data-cursor="link">Contact</a>
+    </div>
+
+    <div>
+      <div class="footer__h">Contact</div>
+      <address class="footer__addr">
+        Downtown Showroom<br>945 Performance Way<br>Los Angeles, CA 90012<br>
+        <a href="tel:+13105550198" data-cursor="link">+1 (310) 555-0198</a>
+      </address>
+    </div>
+
+    <div>
+      <div class="footer__h">Stay Ahead</div>
+      <p class="footer__blurb footer__blurb--sm">Exclusive updates on new models and track events.</p>
+      <form class="subscribe" id="subscribe" novalidate>
+        <input type="email" placeholder="Email address" aria-label="Email address" required>
+        <button type="submit" data-cursor="link">Join</button>
+      </form>
+      <div class="subscribe__msg" id="subscribeMsg"></div>
+    </div>
+  </div>
+
+  <div class="footer__bar">
+    <span>© 2026 GT3 RS Motors. All rights reserved.</span>
+    <div class="footer__legal">
+      <a href="#" data-cursor="link">Privacy</a>
+      <a href="#" data-cursor="link">Terms</a>
+      <a href="#" data-cursor="link">Cookies</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════ LIGHTBOX ══════════════ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+  <button class="lightbox__close" id="lightboxClose" aria-label="Close">✕</button>
+  <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous">‹</button>
+  <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Next">›</button>
+  <figure class="lightbox__figure">
+    <div class="lightbox__stage" id="lightboxStage"></div>
+    <figcaption id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FORGE — Elite Performance Training</title>
+<meta name="description" content="Forge Fitness — an elite training facility built for those who refuse to settle. World-class equipment, expert coaching, 24/7 access.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- SCROLL PROGRESS -->
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+<!-- CURSOR GLOW -->
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <div class="nav__bg"></div>
+  <div class="nav__inner">
+    <a href="#hero" class="brand" data-nav>FORGE<span>.</span></a>
+
+    <nav class="nav__links" id="navLinks">
+      <a href="#hero" data-nav>Home</a>
+      <a href="#programs" data-nav>Programs</a>
+      <a href="#membership" data-nav>Memberships</a>
+      <a href="#trainers" data-nav>Trainers</a>
+      <a href="#stories" data-nav>Success Stories</a>
+      <a href="#gallery" data-nav>Gallery</a>
+      <a href="#footer" data-nav>Contact</a>
+    </nav>
+
+    <a href="#membership" class="btn btn--primary btn--sm nav__cta" data-nav data-magnetic>Join Now</a>
+
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="hero__media" id="heroParallax">
+    <div class="photo photo--hero">[ hero photo — elite athlete lifting, low-light gym ]</div>
+  </div>
+  <div class="hero__scrim"></div>
+
+  <div class="orb orb--1"></div>
+  <div class="orb orb--2"></div>
+  <div class="orb orb--3"></div>
+  <div class="smoke"></div>
+
+  <!-- decorative 3D dumbbell — fixed in the viewport, behind hero copy -->
+  <div class="hero__3d" id="dumbbell3d" aria-hidden="true"></div>
+
+  <div class="hero__content">
+    <div class="wrap">
+      <div class="hero__copy">
+        <div class="pill hero-anim" style="--d:0ms">
+          <i class="dot"></i>
+          <span>Elite Performance Training</span>
+        </div>
+
+        <h1 class="hero__title">
+          <span class="line"><span class="line__in hero-anim" style="--d:90ms">FORGE YOUR</span></span>
+          <span class="line"><span class="line__in hero-anim" style="--d:190ms">STRONGEST SELF.</span></span>
+        </h1>
+
+        <p class="hero__sub hero-anim" style="--d:320ms">Push beyond limits with world-class equipment, expert coaching, and a community built for greatness.</p>
+
+        <div class="hero__actions hero-anim" style="--d:420ms">
+          <a href="#membership" class="btn btn--primary" data-nav data-magnetic>Join Now</a>
+          <a href="#membership" class="btn btn--ghost" data-nav data-magnetic>Explore Memberships</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scrollcue">
+    <div class="scrollcue__line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Strength <i>✦</i> Discipline <i>✦</i> Endurance <i>✦</i> Power <i>✦</i> Recovery <i>✦</i> Mindset <i>✦</i> </span>
+    <span>Strength <i>✦</i> Discipline <i>✦</i> Endurance <i>✦</i> Power <i>✦</i> Recovery <i>✦</i> Mindset <i>✦</i> </span>
+  </div>
+</div>
+
+<!-- WHY CHOOSE US -->
+<section id="why" class="section wrap">
+  <div class="head reveal">
+    <span class="eyebrow">The Difference</span>
+    <h2 class="display">WHY CHOOSE US</h2>
+  </div>
+
+  <div class="grid grid--4 stagger">
+    <article class="card card--feature" data-tilt>
+      <div class="ico"><i class="shape shape--square"></i></div>
+      <h3>Elite Equipment</h3>
+      <p>Precision-engineered machines and free weights from the world's leading performance brands.</p>
+    </article>
+    <article class="card card--feature" data-tilt>
+      <div class="ico"><i class="shape shape--circle"></i></div>
+      <h3>Professional Coaches</h3>
+      <p>Certified specialists dedicated to unlocking your full physical potential, safely.</p>
+    </article>
+    <article class="card card--feature" data-tilt>
+      <div class="ico"><i class="shape shape--tri"></i></div>
+      <h3>24/7 Access</h3>
+      <p>Train on your schedule. The facility never closes for those who never quit.</p>
+    </article>
+    <article class="card card--feature" data-tilt>
+      <div class="ico"><i class="shape shape--drop"></i></div>
+      <h3>Personalized Programs</h3>
+      <p>Training plans built around your goals, biometrics, and progress data.</p>
+    </article>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-band">
+  <div class="wrap stats stagger">
+    <div class="stat"><span class="stat__num" data-count="12" data-suffix="K+">0</span><p>Members Forged</p></div>
+    <div class="stat"><span class="stat__num" data-count="48" data-suffix="">0</span><p>Weekly Classes</p></div>
+    <div class="stat"><span class="stat__num" data-count="24" data-suffix="/7">0</span><p>Doors Open</p></div>
+    <div class="stat"><span class="stat__num" data-count="98" data-suffix="%">0</span><p>Retention Rate</p></div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs" class="section section--alt">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Train Your Way</span>
+      <h2 class="display">PROGRAMS</h2>
+    </div>
+    <div class="grid grid--3 stagger" id="programsGrid"></div>
+  </div>
+</section>
+
+<!-- TRAINERS -->
+<section id="trainers" class="section wrap">
+  <div class="head reveal">
+    <span class="eyebrow">Your Team</span>
+    <h2 class="display">MEET THE TRAINERS</h2>
+  </div>
+  <div class="grid grid--4 stagger" id="trainersGrid"></div>
+</section>
+
+<!-- MEMBERSHIP -->
+<section id="membership" class="section section--alt">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Membership</span>
+      <h2 class="display">CHOOSE YOUR PLAN</h2>
+    </div>
+
+    <div class="grid grid--3 plans stagger">
+      <article class="plan">
+        <h3 class="plan__name">Basic</h3>
+        <div class="plan__price"><span class="plan__amt">$49</span><span class="plan__per">/ month</span></div>
+        <ul class="plan__list">
+          <li>Full gym floor access</li>
+          <li>Locker room &amp; showers</li>
+          <li>2 group classes / month</li>
+          <li>Mobile app tracking</li>
+        </ul>
+        <a href="#footer" class="btn btn--outline btn--block" data-nav data-magnetic>Get Started</a>
+      </article>
+
+      <article class="plan plan--featured">
+        <div class="plan__badge">Most Popular</div>
+        <h3 class="plan__name plan__name--red">Pro</h3>
+        <div class="plan__price"><span class="plan__amt plan__amt--lg">$89</span><span class="plan__per plan__per--light">/ month</span></div>
+        <ul class="plan__list plan__list--bright">
+          <li>Everything in Basic</li>
+          <li>Unlimited group classes</li>
+          <li>2 personal training sessions</li>
+          <li>Nutrition consultation</li>
+          <li>Priority booking</li>
+        </ul>
+        <a href="#footer" class="btn btn--primary btn--block" data-nav data-magnetic>Get Started</a>
+      </article>
+
+      <article class="plan">
+        <h3 class="plan__name">Elite</h3>
+        <div class="plan__price"><span class="plan__amt">$149</span><span class="plan__per">/ month</span></div>
+        <ul class="plan__list">
+          <li>Everything in Pro</li>
+          <li>Unlimited personal training</li>
+          <li>Custom meal planning</li>
+          <li>Recovery suite access</li>
+          <li>Dedicated concierge</li>
+        </ul>
+        <a href="#footer" class="btn btn--outline btn--block" data-nav data-magnetic>Get Started</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- STORIES -->
+<section id="stories" class="section wrap">
+  <div class="head reveal">
+    <span class="eyebrow">Real Results</span>
+    <h2 class="display">TRANSFORMATION STORIES</h2>
+  </div>
+  <div class="grid grid--3 stagger" id="storiesGrid"></div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="section section--alt">
+  <div class="wrap">
+    <div class="head head--tight reveal">
+      <span class="eyebrow">Inside the Facility</span>
+      <h2 class="display">GALLERY</h2>
+    </div>
+    <div class="masonry stagger" id="galleryGrid"></div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Gallery image" hidden>
+  <div class="lightbox__stage photo" id="lightboxLabel"></div>
+  <button class="lightbox__close" id="lightboxClose" aria-label="Close">✕</button>
+</div>
+
+<!-- CTA BAND -->
+<section class="cta">
+  <div class="cta__glow"></div>
+  <div class="cta__inner reveal">
+    <h2 class="display cta__title">YOUR ONLY COMPETITION<br>IS WHO YOU WERE YESTERDAY.</h2>
+    <a href="#membership" class="btn btn--primary btn--lg" data-nav data-magnetic>Start Today</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer" class="footer wrap">
+  <div class="footer__grid stagger">
+    <div>
+      <div class="brand brand--footer">FORGE<span>.</span></div>
+      <p class="footer__blurb">An elite training facility built for those who refuse to settle.</p>
+      <div class="socials">
+        <a href="#" class="social" aria-label="Instagram">IG</a>
+        <a href="#" class="social" aria-label="Facebook">FB</a>
+        <a href="#" class="social" aria-label="TikTok">TT</a>
+        <a href="#" class="social" aria-label="YouTube">YT</a>
+      </div>
+    </div>
+
+    <div>
+      <p class="footer__label">Quick Links</p>
+      <div class="footer__links">
+        <a href="#programs" data-nav>Programs</a>
+        <a href="#membership" data-nav>Memberships</a>
+        <a href="#trainers" data-nav>Trainers</a>
+        <a href="#gallery" data-nav>Gallery</a>
+      </div>
+    </div>
+
+    <div>
+      <p class="footer__label">Contact</p>
+      <p class="footer__text">220 Ironclad Ave<br>Los Angeles, CA 90013</p>
+      <p class="footer__text">hello@forgefitness.com</p>
+      <p class="footer__text footer__text--last">(213) 555-0142</p>
+    </div>
+
+    <div>
+      <p class="footer__label">Hours</p>
+      <p class="footer__text">Mon – Fri: 24 Hours</p>
+      <p class="footer__text">Saturday: 6am – 10pm</p>
+      <p class="footer__text footer__text--last">Sunday: 7am – 8pm</p>
+    </div>
+  </div>
+
+  <div class="footer__bar">
+    <form class="newsletter" id="newsletter" novalidate>
+      <p class="footer__label">Stay in the loop</p>
+      <div class="newsletter__row">
+        <input type="email" id="email" placeholder="Your email" aria-label="Your email" required>
+        <button type="submit" class="btn btn--primary btn--sm" data-magnetic>Subscribe</button>
+      </div>
+      <p class="newsletter__msg" id="newsletterMsg" role="status"></p>
+    </form>
+    <p class="copyright">© 2026 Forge Fitness. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="vendor/three.min.js"></script>
+<script src="dumbbell.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

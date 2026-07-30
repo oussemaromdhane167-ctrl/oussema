@@ -1,0 +1,619 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   Ferrari — an editorial landing page printed on the Broadsheet system.
+
+   Part 1 is the Broadsheet design system (tokens + component classes +
+   the CMYK print treatments), imported from the Claude Design project
+   `_ds/broadsheet-fcf8e1e2-a37c-4eca-98a8-4bd086451803/styles.css`. The
+   only edits are the ones the standalone build needs: the single-image
+   separation targets a plain <img> instead of <image-slot>, and the
+   plate constructions take a --reg registration factor so the press can
+   be animated into register on load.
+
+   Part 2 is this page's own layout, motion scaffolding and chrome.
+   ══════════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap');
+
+/* ─────────────────────────── 1. Broadsheet tokens ─────────────────────── */
+
+:root {
+  --color-bg: #f3f2f2;
+  --color-surface: #eae9e9;
+  --color-text: #201e1d;
+  --color-accent: #0088b0;
+  --color-accent-2: #d6006c;
+  --color-divider: color-mix(in srgb, #201e1d 16%, transparent);
+
+  /* Tonal ramps — generated in OKLCH on one shared lightness scale, so the
+     same step of any role matches the others in visual value. */
+  --color-neutral-100: #f8f4f4;
+  --color-neutral-200: #eae7e7;
+  --color-neutral-300: #d7d3d3;
+  --color-neutral-400: #bab6b6;
+  --color-neutral-500: #9b9797;
+  --color-neutral-600: #7d7979;
+  --color-neutral-700: #605d5d;
+  --color-neutral-800: #444141;
+  --color-neutral-900: #2d2b2b;
+
+  --color-accent-100: #e9f8ff;
+  --color-accent-200: #cbeeff;
+  --color-accent-300: #99e0ff;
+  --color-accent-400: #62c5ee;
+  --color-accent-500: #38a6cf;
+  --color-accent-600: #1186ac;
+  --color-accent-700: #006786;
+  --color-accent-800: #004961;
+  --color-accent-900: #0a303e;
+
+  --color-accent-2-100: #fff1f4;
+  --color-accent-2-200: #ffdee6;
+  --color-accent-2-300: #ffc0d0;
+  --color-accent-2-400: #ff90b1;
+  --color-accent-2-500: #ff458e;
+  --color-accent-2-600: #d82071;
+  --color-accent-2-700: #aa0b56;
+  --color-accent-2-800: #790e3d;
+  --color-accent-2-900: #4b1528;
+
+  /* The third process ink. A print treatment color, not an interface
+     accent — body copy and chrome never take it. */
+  --color-process-yellow: #edbb00;
+
+  --font-heading: "Source Serif 4", system-ui, sans-serif;
+  --font-heading-weight: 600;
+  --font-body: "Source Serif 4", system-ui, sans-serif;
+
+  --space-1: 5.0px;
+  --space-2: 10.0px;
+  --space-3: 15.0px;
+  --space-4: 20.0px;
+  --space-6: 30.0px;
+  --space-8: 40.0px;
+
+  --radius-sm: 1px;
+  --radius-md: 2px;
+  --radius-lg: 4px;
+
+  --shadow-sm: 0 1px 2px color-mix(in srgb, #2d2b2b 14%, transparent);
+  --shadow-md: 0 3px 10px color-mix(in srgb, #2d2b2b 16%, transparent);
+  --shadow-lg: 0 12px 32px color-mix(in srgb, #2d2b2b 22%, transparent);
+
+  /* --reg: the registration factor. 1 is the design's resting
+     misregistration; the press driver eases it down from a wide spread on
+     load, so the plates gather onto the sheet as the page arrives. */
+  --reg: 1;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  margin: 0; font-size: 15px; line-height: 1.55; font-weight: 400;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  line-height: 1.12; letter-spacing: -0.015em; margin: 0 0 var(--space-2);
+}
+h1 { font-size: 42px; }
+h2 { font-size: 32px; }
+h3 { font-size: 25px; }
+h4 { font-size: 20px; }
+h5 { font-size: 16px; }
+h6 { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; }
+p { margin: 0 0 var(--space-3); }
+a { color: var(--color-accent); text-underline-offset: 3px; }
+img { display: block; max-width: 100%; }
+figure { margin: 0; }
+figcaption {
+  font-size: 11px; margin-top: var(--space-1);
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
+.text-muted { color: color-mix(in srgb, var(--color-text) 55%, transparent); }
+:focus { outline: none; }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+::selection { background: color-mix(in srgb, var(--color-accent) 30%, transparent); }
+
+/* — the halftone screen — */
+.halftone { position: relative; filter: grayscale(0.35) contrast(1.15); overflow: hidden; }
+.halftone::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(circle, rgba(0,0,0,0.22) 30%, transparent 32%);
+  background-size: 3px 3px; mix-blend-mode: multiply;
+}
+
+/* — the four-color separation — a photograph printed as its misregistered
+     process plates. figure.cmyk > .print > img; the plates are extracted,
+     offset and multiplied live by the #sep-all filter in print-plates.js,
+     and hover eases them into register while purifying their inks, so the
+     converged merge IS the photograph. — */
+.cmyk { position: relative; background: var(--color-bg); }
+.cmyk::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  background-image: radial-gradient(circle, rgba(0,0,0,0.22) 30%, transparent 32%);
+  background-size: 3px 3px; mix-blend-mode: multiply;
+}
+.cmyk .print { position: relative; width: 100%; filter: url(#sep-all); overflow: hidden; }
+.cmyk .print img {
+  width: 100%; height: 100%; display: block; object-fit: cover;
+  transform: scale(1.001); /* keeps the plate edges off the box seam */
+}
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+  /* without the driver (it stands down on exactly these conditions), hover
+     stays the old single cut to the crisp source */
+  .cmyk .print:hover { filter: none; }
+}
+
+/* — the plate numeral: display figures set as three misregistered process
+     plates, the dark core coming entirely from the C×M×Y multiply overlap — */
+.cmyk-num {
+  --cmyk-num-ground: var(--color-bg);
+  position: relative; width: fit-content; line-height: 0.9;
+  font-feature-settings: "pnum" 1;
+  background: var(--cmyk-num-ground); padding: 0.12em; margin: -0.12em;
+}
+.cmyk-num .paper {
+  color: var(--color-bg);
+  text-shadow: 0.036em 0.025em 0 var(--color-bg), -0.031em -0.023em 0 var(--color-bg);
+}
+.cmyk-num .plate {
+  position: absolute; inset: 0.12em; mix-blend-mode: multiply;
+  text-box: trim-both cap alphabetic;
+}
+.cmyk-num .plate-c { color: var(--color-accent); }
+.cmyk-num .plate-m {
+  color: var(--color-accent-2);
+  translate: calc((0.036em + 0.018em * var(--press-nx, 0)) * var(--reg))
+             calc((0.025em + 0.0125em * var(--press-ny, 0)) * var(--reg));
+}
+.cmyk-num .plate-y {
+  color: var(--color-process-yellow);
+  translate: calc((-0.031em + 0.018em * var(--press-nx, 0)) * var(--reg))
+             calc((-0.023em + 0.0125em * var(--press-ny, 0)) * var(--reg));
+}
+
+/* — the plate headline: the same construction at half the numeral's
+     offsets, recut for display type set in running text — */
+.cmyk-head { position: relative; }
+.cmyk-head .paper {
+  color: var(--color-bg);
+  text-shadow: 0.027em 0.0185em 0 var(--color-bg), -0.0245em -0.0175em 0 var(--color-bg);
+}
+.cmyk-head .plate {
+  position: absolute; inset: 0; mix-blend-mode: multiply;
+  pointer-events: none; user-select: none;
+  text-box: trim-both cap alphabetic;
+}
+.cmyk-head .plate-c { color: var(--color-accent); }
+.cmyk-head .plate-m {
+  color: var(--color-accent-2);
+  translate: calc((0.018em + 0.009em * var(--press-nx, 0)) * var(--reg))
+             calc((0.0125em + 0.006em * var(--press-ny, 0)) * var(--reg));
+}
+.cmyk-head .plate-y {
+  color: var(--color-process-yellow);
+  translate: calc((-0.0155em + 0.009em * var(--press-nx, 0)) * var(--reg))
+             calc((-0.0115em + 0.006em * var(--press-ny, 0)) * var(--reg));
+}
+
+/* ───────────────────── Broadsheet components ──────────────────────────── */
+
+.hr { height: 1px; border: 0; margin: var(--space-4) 0; background: var(--color-divider); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  cursor: pointer; text-decoration: none;
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 14px; line-height: 1.2; color: var(--color-text);
+  background: transparent; border: 1px solid transparent;
+  padding: var(--space-2) calc(var(--space-3) * 1.2);
+  border-radius: var(--radius-md);
+}
+.btn svg { display: block; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-primary { background: var(--color-accent); color: var(--color-bg); }
+.btn-primary:hover { background: var(--color-accent-600); }
+.btn-primary:active { background: var(--color-accent-700); }
+.btn-secondary { border-color: var(--color-divider); }
+.btn-secondary:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+.btn-ghost { color: var(--color-accent); padding-inline: var(--space-1); }
+.btn-ghost:hover { background: color-mix(in srgb, var(--color-accent) 10%, transparent); }
+.btn-icon { width: 36px; height: 36px; padding: 0; }
+
+.field > label {
+  display: block; font-size: 12px; margin-bottom: 5px;
+  color: color-mix(in srgb, var(--color-text) 70%, transparent);
+}
+.input {
+  width: 100%; min-height: 36px; padding: 6px 10px; font: inherit;
+  font-size: 14px; color: var(--color-text); caret-color: var(--color-accent);
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider); border-radius: var(--radius-md);
+}
+.input::placeholder { color: color-mix(in srgb, var(--color-text) 65%, transparent); opacity: 1; }
+.input:hover { border-color: color-mix(in srgb, var(--color-text) 45%, transparent); }
+.input:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
+
+.tag {
+  display: inline-flex; align-items: center; font-size: 11px;
+  letter-spacing: 0.02em; padding: 3px 10px;
+  border-radius: calc(var(--radius-md) * 0.75);
+}
+.tag-accent { background: var(--color-accent-100); color: var(--color-accent-800); }
+.tag-accent-2 { background: var(--color-accent-2-100); color: var(--color-accent-2-800); }
+.tag-neutral { background: var(--color-neutral-100); color: var(--color-neutral-800); }
+.tag-outline { border: 1px solid var(--color-accent); color: var(--color-accent); }
+
+.nav {
+  display: flex; align-items: center; gap: var(--space-4);
+  padding: var(--space-3) var(--space-4); border-bottom: none;
+}
+.nav-brand {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 18px; margin-right: auto;
+}
+.nav a { color: inherit; text-decoration: none; font-size: 14px; }
+.nav a:hover, .nav a[aria-current='page'] { color: var(--color-accent); }
+
+/* ──────────────────────── 2. The page itself ──────────────────────────── */
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* the sheet is no longer bleached white: the ground is warmed toward the
+   second process ink, so every plate, numeral and headline union prints on
+   the same tinted press sheet */
+body {
+  --color-bg: color-mix(in srgb, var(--color-accent-2-200) 42%, #f3f2f2);
+  --color-surface: color-mix(in srgb, var(--color-accent-2-200) 42%, #eae9e9);
+  margin: 0; text-wrap: pretty; background: var(--color-bg);
+  overflow-x: hidden;
+}
+a { color: var(--color-accent-700); }
+a:hover { color: var(--color-accent-800); }
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 2px solid var(--color-accent); outline-offset: 2px;
+}
+
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 72px); }
+.kicker {
+  display: block; font-size: 13px; line-height: 14px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 70%, transparent);
+  margin: 0 0 14px;
+}
+.display {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: clamp(30px, 3.4vw, 44px); line-height: 1.1; letter-spacing: -0.02em;
+  margin: 0; text-box: trim-both cap alphabetic;
+}
+.body-copy {
+  font-size: 15.5px; line-height: 28px; margin: 0;
+  color: color-mix(in srgb, var(--color-text) 78%, transparent);
+}
+.rule-heavy { height: 5px; border: 0; margin: 0; border-top: 2px solid var(--color-text); border-bottom: 1px solid var(--color-text); }
+.rule-hair { height: 0; border: 0; border-top: 1px solid var(--color-text); margin: 0; }
+
+/* — the press loader: the sheet arrives after the plates are inked — */
+.press-loader {
+  position: fixed; inset: 0; z-index: 100; background: var(--color-bg);
+  display: grid; place-content: center; gap: 18px; justify-items: center;
+}
+.press-loader[hidden] { display: none; }
+.press-loader__mark {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: clamp(38px, 8vw, 76px); letter-spacing: -0.03em; line-height: 0.9;
+}
+.press-loader__bar {
+  width: min(280px, 60vw); height: 3px; background: color-mix(in srgb, var(--color-text) 16%, transparent);
+  position: relative; overflow: hidden;
+}
+.press-loader__bar span { position: absolute; inset: 0 100% 0 0; background: var(--color-text); }
+.press-loader__meta {
+  font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-text) 60%, transparent);
+  display: flex; gap: 14px;
+}
+
+/* — masthead — */
+.masthead {
+  position: sticky; top: 0; z-index: 40;
+  background: color-mix(in srgb, var(--color-bg) 86%, transparent);
+  backdrop-filter: blur(10px) saturate(1.1);
+  border-bottom: 1px solid transparent;
+  transition: border-color 400ms ease, background 400ms ease;
+}
+.masthead.is-stuck { border-bottom-color: var(--color-text); }
+.masthead .nav { padding-inline: 0; gap: 28px; }
+.nav-brand {
+  font-size: 20px; letter-spacing: 0.02em; margin-right: auto;
+  text-decoration: none; color: inherit;
+}
+.masthead .nav-brand:hover { color: var(--color-accent-700); }
+.nav-link {
+  font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+  text-decoration: none; color: inherit; position: relative; padding-bottom: 3px;
+}
+.nav-link::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  background: var(--color-accent-700); transform: scaleX(0); transform-origin: left;
+  transition: transform 320ms cubic-bezier(.22,.61,.36,1);
+}
+.nav-link:hover::after, .nav-link.is-active::after { transform: scaleX(1); }
+.nav-link.is-active { color: var(--color-accent-700); }
+.nav-toggle { display: none; }
+
+/* mobile drawer */
+.drawer {
+  position: fixed; inset: 0; z-index: 60; background: var(--color-bg);
+  display: none; flex-direction: column; justify-content: center; gap: 6px;
+  padding: 0 clamp(20px, 6vw, 72px);
+}
+.drawer.is-open { display: flex; }
+.drawer a {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: clamp(30px, 9vw, 54px); text-decoration: none; color: var(--color-text);
+  letter-spacing: -0.02em; padding: 6px 0;
+}
+.drawer__close { position: absolute; top: 18px; right: clamp(20px, 6vw, 72px); }
+
+/* — hero — */
+.hero { padding: 84px 0 56px; position: relative; }
+.hero h1 {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: clamp(46px, 7vw, 104px); line-height: 1.06; letter-spacing: -0.025em;
+  margin: 0 0 0 -0.035em; text-box: trim-both cap alphabetic;
+}
+.hero h1 .line { display: block; }
+.hero__figure { overflow: visible; margin: 64px auto 0; width: min(920px, 100%); }
+.hero__foot {
+  display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 28px clamp(28px, 5vw, 80px); align-items: end; margin-top: 56px;
+}
+.hero__lede { font-size: 19px; line-height: 32px; margin: 0; max-width: 52ch; text-box: trim-both cap alphabetic; }
+.hero__actions { display: flex; gap: 15px; flex-wrap: wrap; }
+
+/* — the running strip — */
+.strip {
+  border-top: 1px solid var(--color-text); border-bottom: 1px solid var(--color-text);
+  overflow: hidden; padding: 12px 0; margin: 42px 0 0;
+}
+.strip__track { display: flex; width: max-content; will-change: transform; }
+.strip__track span {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 15px; letter-spacing: 0.16em; text-transform: uppercase;
+  padding-right: 42px; white-space: nowrap;
+}
+.strip__track span em { font-style: normal; color: var(--color-accent-700); }
+
+/* — spec table — */
+.specs { padding: 56px 0 70px; }
+.specs__meta {
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px 28px;
+  margin: 0; padding: 14px 0; font-size: 13px; line-height: 14px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-text) 70%, transparent);
+}
+.specs__grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px clamp(28px, 6vw, 70px);
+  padding: 14px 0 28px;
+}
+.spec-row {
+  display: flex; align-items: baseline; gap: 8px; margin: 0;
+  font-size: 15.5px; line-height: 28px;
+}
+.spec-row .leader {
+  flex: 1; min-width: 28px; align-self: flex-end; margin-bottom: 0.34em;
+  border-bottom: 1px dotted color-mix(in srgb, var(--color-text) 45%, transparent);
+}
+.spec-row .value {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight); font-size: 17px;
+}
+.spec-row .value.accent { color: var(--color-accent-700); }
+
+/* — the rev counter — */
+.tach { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px clamp(28px, 6vw, 70px); align-items: center; padding: 42px 0 0; }
+.tach svg { width: 100%; height: auto; overflow: visible; }
+.tach__readout {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: clamp(40px, 6vw, 72px); letter-spacing: -0.03em; line-height: 1;
+}
+.tach__readout small { display: block; font-family: var(--font-body); font-weight: 400; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 12px; color: color-mix(in srgb, var(--color-text) 70%, transparent); }
+
+/* — models — */
+.models { padding: 70px 0 56px; }
+.models__grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 56px clamp(32px, 5vw, 80px); margin-top: 42px;
+}
+.model figure { margin: 0 0 20px; }
+.model h3 {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 24px; line-height: 28px; letter-spacing: -0.01em; margin: 0;
+  text-box: trim-both cap alphabetic;
+}
+.model__spec {
+  font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+  margin: 10px 0 0; color: var(--color-accent-700);
+}
+.model p.body-copy { margin-top: 14px; text-align: justify; hyphens: auto; }
+
+/* — printed figures — */
+.figures { padding: 56px 0 70px; }
+.figures__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 42px clamp(24px, 4vw, 56px); }
+.figures .cmyk-num {
+  display: block; font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: clamp(56px, 7vw, 92px); letter-spacing: -0.03em;
+}
+.figures p { margin: 20px 0 0; max-width: 24ch; }
+
+/* — heritage — */
+.heritage { padding: 70px 0 56px; }
+.heritage__cols {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px clamp(32px, 6vw, 90px); position: relative;
+}
+.heritage__col { display: grid; grid-template-columns: 5.5em 1fr; gap: 28px 20px; align-items: baseline; }
+.heritage__col > span {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 20px; font-feature-settings: 'pnum' 1;
+}
+.heritage__plates { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: clamp(20px, 3vw, 42px); margin-top: 56px; }
+
+/* — technology split — */
+.tech {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px clamp(24px, 5vw, 96px); align-items: center; padding: 56px 0 84px;
+}
+.tech h2 { font-size: clamp(28px, 3vw, 38px); line-height: 1.15; letter-spacing: -0.015em; }
+.tech .tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+
+/* — the factory bleed — */
+.bleed { position: relative; margin: 0; overflow: hidden; }
+.bleed .print { height: clamp(320px, 56vh, 620px); }
+.bleed .print img { height: 100%; }
+.bleed__caption {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+  padding: clamp(20px, 5vw, 56px);
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap;
+  font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--color-bg); text-shadow: 0 1px 14px rgba(0,0,0,.55);
+}
+.bleed__caption strong {
+  font-family: var(--font-heading); font-size: clamp(22px, 3.4vw, 40px);
+  letter-spacing: -0.02em; text-transform: none;
+}
+
+/* — the press rule: what separates one section from the next. A hairline
+     broken by a colour bar of the three process inks and the registration
+     target the pressman lines the plates up on. The lines grow outward from
+     the mark as the rule comes into view. — */
+.press-rule {
+  display: flex; align-items: center; gap: clamp(10px, 2vw, 18px);
+  margin: 0; padding: clamp(18px, 4vw, 34px) 0;
+}
+.press-rule__line {
+  flex: 1; height: 1px; background: var(--color-text);
+}
+.press-rule__line:first-child { transform-origin: right center; }
+.press-rule__line:last-child { transform-origin: left center; }
+.press-rule__bar {
+  flex: none; width: clamp(28px, 5vw, 52px); height: 4px;
+  background: linear-gradient(90deg,
+    var(--color-accent) 0 33.34%,
+    var(--color-accent-2) 33.34% 66.67%,
+    var(--color-process-yellow) 66.67% 100%);
+}
+.press-rule__mark {
+  flex: none; width: 22px; height: 22px; overflow: visible;
+  fill: none; stroke: currentColor; stroke-width: 1;
+  color: color-mix(in srgb, var(--color-text) 72%, transparent);
+}
+.js [data-rule] .press-rule__line { transform: scaleX(0); }
+.js [data-rule] .press-rule__bar,
+.js [data-rule] .press-rule__mark { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .js [data-rule] .press-rule__line { transform: none !important; }
+  .js [data-rule] .press-rule__bar,
+  .js [data-rule] .press-rule__mark { opacity: 1 !important; }
+}
+
+/* — the emblem field: shop badges adrift over the hero sheet. The layer sits
+     behind the type (negative z-index, so the headline plates still multiply
+     onto the page rather than into a new stacking context) and is inert to
+     the pointer; main.js reads the cursor off the window instead. — */
+.emblems {
+  position: absolute; top: -32px; bottom: -32px; left: 50%; width: 100vw;
+  transform: translateX(-50%); z-index: -1; pointer-events: none; overflow: hidden;
+}
+.emblem {
+  position: absolute; top: 0; left: 0; width: 28px; height: 34px;
+  font-family: var(--font-heading); will-change: transform;
+}
+.emblem__field { fill: var(--color-process-yellow); stroke: var(--color-text); stroke-width: 2.4; }
+.emblem__green { fill: #008c45; }
+.emblem__white { fill: #f4f5f0; }
+.emblem__red { fill: #cd212a; }
+.emblem__mark { fill: var(--color-text); font-weight: 600; letter-spacing: 0.02em; }
+
+/* — gallery — */
+.gallery { padding: 56px 0 70px; }
+.gallery__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: clamp(20px, 3vw, 42px); }
+.gallery figure { margin: 0; }
+.gallery .print { aspect-ratio: 3 / 4; }
+.gallery figcaption {
+  font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 12px;
+  color: color-mix(in srgb, var(--color-text) 62%, transparent);
+}
+
+/* — quotes — */
+.quotes {
+  padding: 56px 0 84px; display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 56px clamp(32px, 6vw, 90px);
+}
+.quotes blockquote {
+  font-family: var(--font-heading); font-style: italic; font-weight: 400;
+  font-size: clamp(22px, 2.3vw, 30px); line-height: 42px; letter-spacing: -0.01em;
+  max-width: 32ch; margin: 0; text-box: trim-both cap alphabetic;
+}
+.quotes figcaption { font-size: 15.5px; line-height: 28px; color: color-mix(in srgb, var(--color-text) 70%, transparent); margin: 42px 0 0; }
+
+/* — contact — */
+.contact { padding: 56px 0 42px; }
+.contact h3 {
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: clamp(26px, 2.8vw, 34px); line-height: 1.2; letter-spacing: -0.015em;
+  margin: 0; max-width: 30ch; text-box: trim-both cap alphabetic;
+}
+.contact__form { display: flex; gap: 15px; align-items: stretch; max-width: 480px; margin-top: 28px; }
+.contact__note { font-size: 13px; margin-top: 14px; min-height: 20px; color: var(--color-accent-700); }
+.contact__dealers {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 28px clamp(24px, 4vw, 56px); margin-top: 56px;
+  border-top: 1px solid var(--color-text); padding-top: 28px;
+}
+.contact__dealers h4 { font-size: 17px; margin: 0 0 6px; }
+.contact__dealers p { font-size: 13.5px; line-height: 24px; margin: 0; color: color-mix(in srgb, var(--color-text) 70%, transparent); }
+
+/* — footer — */
+.site-foot {
+  padding: 56px 0; display: flex; flex-wrap: wrap; gap: 20px 42px; align-items: baseline;
+  font-size: 13px; line-height: 28px; color: color-mix(in srgb, var(--color-text) 70%, transparent);
+  border-top: 1px solid var(--color-text);
+}
+.site-foot__social { display: flex; gap: 24px; }
+.site-foot a { text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; }
+.credits {
+  padding: 0 0 56px; font-size: 11.5px; line-height: 20px;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
+.credits a { color: inherit; }
+
+/* — motion scaffolding: only hide things when JS is actually driving them — */
+.js [data-anim] { opacity: 0; }
+.js [data-anim="chars"] { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .js [data-anim] { opacity: 1 !important; transform: none !important; }
+}
+
+/* — responsive — */
+@media (max-width: 900px) {
+  .hero__foot { grid-template-columns: 1fr; align-items: start; }
+  .models__grid { grid-template-columns: 1fr; gap: 42px; }
+  .figures__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .specs__grid { grid-template-columns: 1fr; }
+  .tach { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .masthead .nav-link, .masthead .btn-primary { display: none; }
+  .nav-toggle { display: inline-flex; }
+  .hero { padding-top: 48px; }
+  .hero__figure { margin-top: 40px; }
+  .quotes blockquote { line-height: 34px; }
+}
+@media (max-width: 480px) {
+  .figures__grid { grid-template-columns: 1fr; }
+  .contact__form { flex-direction: column; }
+}

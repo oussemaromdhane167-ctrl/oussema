@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ferrari — Engineering emotion</title>
+<meta name="description" content="A concept landing page for Ferrari, printed on the Broadsheet design system: four-colour process separations, misregistered plate headlines and a warm press sheet.">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- the press warming up: the sheet arrives once the plates are inked -->
+<div class="press-loader" id="loader" aria-hidden="true">
+  <span class="press-loader__mark cmyk-num" id="loader-mark">
+    <span class="paper">Ferrari</span>
+    <span class="plate plate-c" aria-hidden="true">Ferrari</span>
+    <span class="plate plate-m" aria-hidden="true">Ferrari</span>
+    <span class="plate plate-y" aria-hidden="true">Ferrari</span>
+  </span>
+  <div class="press-loader__bar"><span id="loader-bar"></span></div>
+  <div class="press-loader__meta"><span>Maranello</span><span id="loader-pct">000</span><span>Four colour</span></div>
+</div>
+
+<header class="masthead" id="masthead">
+  <div class="wrap">
+    <nav class="nav" aria-label="Primary">
+      <a class="nav-brand" href="#top" data-anim="nav" aria-label="Ferrari — back to the top">Ferrari</a>
+      <a class="nav-link" href="#models" data-anim="nav">Models</a>
+      <a class="nav-link" href="#performance" data-anim="nav">Performance</a>
+      <a class="nav-link" href="#heritage" data-anim="nav">Heritage</a>
+      <a class="nav-link" href="#gallery" data-anim="nav">Gallery</a>
+      <a class="nav-link" href="#contact" data-anim="nav">Contact</a>
+      <button type="button" class="btn btn-primary magnetic" data-scroll-to="#models" data-anim="nav">Explore models</button>
+      <button type="button" class="btn btn-secondary nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="drawer">Menu</button>
+    </nav>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <button type="button" class="btn btn-secondary drawer__close" id="drawer-close">Close</button>
+  <a href="#top">Ferrari</a>
+  <a href="#models">Models</a>
+  <a href="#performance">Performance</a>
+  <a href="#heritage">Heritage</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<main>
+<div class="wrap">
+
+  <!-- ─────────────────────────────── hero ─────────────────────────────── -->
+  <section id="top" class="hero">
+    <!-- the emblem field: shop badges drifting across the sheet, shying away
+         from the hand. Populated by main.js from #emblem-tpl. -->
+    <div class="emblems" id="emblems" aria-hidden="true"></div>
+
+    <h1>
+      <span class="line cmyk-head" data-anim="line">
+        <span class="paper">Engineering</span>
+        <span class="plate plate-c" aria-hidden="true">Engineering</span>
+        <span class="plate plate-m" aria-hidden="true">Engineering</span>
+        <span class="plate plate-y" aria-hidden="true">Engineering</span>
+      </span>
+      <span class="line cmyk-head" data-anim="line">
+        <span class="paper">emotion.</span>
+        <span class="plate plate-c" aria-hidden="true">emotion.</span>
+        <span class="plate plate-m" aria-hidden="true">emotion.</span>
+        <span class="plate plate-y" aria-hidden="true">emotion.</span>
+      </span>
+    </h1>
+
+    <figure class="cmyk hero__figure" data-anim="hero-fig">
+      <div class="print" style="aspect-ratio:16/9" data-parallax="0.12">
+        <img src="assets/hero-sf90.jpg" alt="Ferrari SF90 Stradale in Rosso Corsa, three-quarter front, parked on a Mayfair street.">
+      </div>
+    </figure>
+
+    <div class="hero__foot">
+      <p class="hero__lede" data-anim="up">Experience the perfect fusion of innovation, performance and timeless Italian design — engines built to be heard, bodies drawn to be remembered, and a factory in Maranello that has never once built a car by consensus.</p>
+      <div class="hero__actions" data-anim="up">
+        <button type="button" class="btn btn-primary magnetic" data-scroll-to="#models">Explore collection</button>
+        <button type="button" class="btn btn-ghost magnetic" style="gap:8px" data-scroll-to="#gallery">
+          <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 2.2 13.2 8 3.5 13.8Z" fill="currentColor"></path></svg>
+          Watch the film
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ───────────────────────────── running strip ────────────────────────── -->
+<div class="strip" aria-hidden="true">
+  <div class="strip__track" id="strip-track">
+    <span>Maranello <em>·</em> Fiorano <em>·</em> Scuderia <em>·</em> Cavallino Rampante <em>·</em> Rosso Corsa <em>·</em> Via Abetone Inferiore <em>·</em> Tailor Made <em>·</em> 1947 <em>·</em>&nbsp;</span>
+    <span>Maranello <em>·</em> Fiorano <em>·</em> Scuderia <em>·</em> Cavallino Rampante <em>·</em> Rosso Corsa <em>·</em> Via Abetone Inferiore <em>·</em> Tailor Made <em>·</em> 1947 <em>·</em>&nbsp;</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ───────────────────────────── performance ──────────────────────────── -->
+  <section id="performance" class="specs" aria-label="Performance figures">
+    <hr class="rule-heavy">
+    <p class="specs__meta">
+      <span data-anim="up">Maranello, Emilia-Romagna</span>
+      <span data-anim="up">Founded 1947</span>
+      <span data-anim="up">Nine hundred and more Grand Prix</span>
+      <span data-anim="up">Hand-assembled</span>
+    </p>
+    <hr class="rule-hair">
+    <div class="specs__grid">
+      <p class="spec-row" data-anim="up"><span>Nought to one hundred, seconds</span><span class="leader"></span><span class="value accent" data-count="2.5" data-decimals="1">0.0</span></p>
+      <p class="spec-row" data-anim="up"><span>Combined output, horsepower</span><span class="leader"></span><span class="value" data-count="1000" data-group="1">0</span></p>
+      <p class="spec-row" data-anim="up"><span>Fiorano lap, minutes</span><span class="leader"></span><span class="value" data-count="79" data-clock="1">0:00</span></p>
+      <p class="spec-row" data-anim="up"><span>Redline, revolutions per minute</span><span class="leader"></span><span class="value" data-count="8500" data-group="1">0</span></p>
+    </div>
+    <hr class="rule-hair">
+
+    <div class="tach" id="tach">
+      <svg viewBox="0 0 400 210" role="img" aria-label="Rev counter sweeping to the 8,500 rpm redline">
+        <g fill="none" stroke="currentColor" stroke-width="1">
+          <path id="tach-arc" d="M 50 190 A 150 150 0 0 1 350 190" stroke-width="2"></path>
+          <g class="tach-ticks" stroke-width="1.5">
+            <line x1="68" y1="190" x2="50" y2="190"></line>
+            <line x1="75.9" y1="144.9" x2="59.1" y2="138.7"></line>
+            <line x1="98.9" y1="105.2" x2="85.1" y2="93.6"></line>
+            <line x1="134" y1="75.7" x2="125" y2="60.1"></line>
+            <line x1="177.1" y1="60" x2="174" y2="42.3"></line>
+            <line x1="222.9" y1="60" x2="226" y2="42.3"></line>
+            <line x1="266" y1="75.7" x2="275" y2="60.1"></line>
+            <line x1="301.1" y1="105.2" x2="314.9" y2="93.6"></line>
+            <line x1="324.1" y1="144.9" x2="340.9" y2="138.7"></line>
+            <line x1="332" y1="190" x2="350" y2="190"></line>
+          </g>
+          <path id="tach-red" d="M 347.7 164 A 150 150 0 0 1 350 190" stroke="var(--color-accent-2)" stroke-width="5"></path>
+        </g>
+        <g font-size="13" font-family="var(--font-heading)" text-anchor="middle" fill="currentColor" opacity="0.7">
+          <text x="82" y="195">0</text><text x="89" y="154">1</text><text x="110" y="119">2</text>
+          <text x="141" y="92">3</text><text x="180" y="78">4</text><text x="221" y="78">5</text>
+          <text x="259" y="92">6</text><text x="290" y="119">7</text><text x="311" y="154">8</text>
+          <text x="318" y="195">9</text>
+        </g>
+        <g id="tach-needle" transform="rotate(0 200 190)">
+          <line x1="200" y1="190" x2="74" y2="190" stroke="var(--color-text)" stroke-width="3"></line>
+        </g>
+        <circle cx="200" cy="190" r="7" fill="var(--color-text)"></circle>
+      </svg>
+      <div>
+        <span class="kicker">Tipo F154 · redline</span>
+        <p class="tach__readout"><span id="tach-readout">0</span><small>Revolutions per minute, measured at Fiorano</small></p>
+      </div>
+    </div>
+  </section>
+
+  <div class="press-rule" data-rule aria-hidden="true">
+    <span class="press-rule__line"></span>
+    <span class="press-rule__bar"></span>
+    <svg class="press-rule__mark" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><circle cx="12" cy="12" r="2.6"></circle><path d="M12 .5v6M12 17.5v6M.5 12h6M17.5 12h6"></path></svg>
+    <span class="press-rule__bar"></span>
+    <span class="press-rule__line"></span>
+  </div>
+
+  <!-- ─────────────────────────────── models ────────────────────────────── -->
+  <section id="models" class="models">
+    <span class="kicker" data-anim="up">The current cars</span>
+    <h2 class="display" data-anim="up">Four ways to be late for dinner</h2>
+    <div class="models__grid">
+
+      <div class="model" data-anim="card">
+        <figure class="cmyk">
+          <div class="print" style="aspect-ratio:4/3"><img src="assets/model-sf90.jpg" alt="Ferrari SF90 Stradale seen in profile."></div>
+        </figure>
+        <h3>SF90 Stradale</h3>
+        <p class="model__spec">Hybrid V8 · 1,000 cv</p>
+        <p class="body-copy">Three electric motors and a twin-turbo eight, arranged so that the first metre of a launch is silent and every metre after it is not. The company's first series production plug-in, built around a Formula One control philosophy.</p>
+      </div>
+
+      <div class="model" data-anim="card">
+        <figure class="cmyk">
+          <div class="print" style="aspect-ratio:4/3"><img src="assets/model-296.jpg" alt="Ferrari 296 GTB in Giallo Modena, three-quarter front."></div>
+        </figure>
+        <h3>296 GTB</h3>
+        <p class="model__spec">Hybrid V6 · 830 cv</p>
+        <p class="body-copy">A six with a hundred and twenty degrees between its banks and turbochargers inside the vee — compact, loud in an unfamiliar register, and short enough in the wheelbase to make a mountain road feel like a private commission.</p>
+      </div>
+
+      <div class="model" data-anim="card">
+        <figure class="cmyk">
+          <div class="print" style="aspect-ratio:4/3"><img src="assets/model-12cilindri.jpg" alt="Ferrari 12Cilindri in red, three-quarter front, on a city forecourt."></div>
+        </figure>
+        <h3>12Cilindri</h3>
+        <p class="model__spec">Naturally aspirated V12 · 830 cv</p>
+        <p class="body-copy">No turbochargers, no assistance, no apology: twelve cylinders breathing air and revving to nine and a half, in a front-engined body that reads as a deliberate argument with the present.</p>
+      </div>
+
+      <div class="model" data-anim="card">
+        <figure class="cmyk">
+          <div class="print" style="aspect-ratio:4/3"><img src="assets/model-purosangue.jpg" alt="Ferrari Purosangue, four-door, three-quarter front."></div>
+        </figure>
+        <h3>Purosangue</h3>
+        <p class="model__spec">V12 · four doors · 725 cv</p>
+        <p class="body-copy">Four seats, four doors and an active suspension that refuses to lean, so the family car keeps the twelve and loses none of the argument. Thoroughbred, as the name insists, rather than utility.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="press-rule" data-rule aria-hidden="true">
+    <span class="press-rule__line"></span>
+    <span class="press-rule__bar"></span>
+    <svg class="press-rule__mark" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><circle cx="12" cy="12" r="2.6"></circle><path d="M12 .5v6M12 17.5v6M.5 12h6M17.5 12h6"></path></svg>
+    <span class="press-rule__bar"></span>
+    <span class="press-rule__line"></span>
+  </div>
+
+  <!-- ───────────────────────────── printed figures ─────────────────────── -->
+  <section class="figures">
+    <span class="kicker" data-anim="up">Printed figures</span>
+    <div class="figures__grid">
+      <div data-anim="up">
+        <span class="cmyk-num" data-count="2.5" data-decimals="1" data-suffix="s">
+          <span class="paper">0.0s</span>
+          <span class="plate plate-c" aria-hidden="true">0.0s</span>
+          <span class="plate plate-m" aria-hidden="true">0.0s</span>
+          <span class="plate plate-y" aria-hidden="true">0.0s</span>
+        </span>
+        <p class="body-copy">To one hundred kilometres an hour, with the electric axle doing the first of the work.</p>
+      </div>
+      <div data-anim="up">
+        <span class="cmyk-num" data-count="340">
+          <span class="paper">0</span>
+          <span class="plate plate-c" aria-hidden="true">0</span>
+          <span class="plate plate-m" aria-hidden="true">0</span>
+          <span class="plate plate-y" aria-hidden="true">0</span>
+        </span>
+        <p class="body-copy">Kilometres an hour, measured at Fiorano and never advertised as a destination.</p>
+      </div>
+      <div data-anim="up">
+        <span class="cmyk-num" data-count="79">
+          <span class="paper">0</span>
+          <span class="plate plate-c" aria-hidden="true">0</span>
+          <span class="plate plate-m" aria-hidden="true">0</span>
+          <span class="plate plate-y" aria-hidden="true">0</span>
+        </span>
+        <p class="body-copy">Years of racing, uninterrupted — the only constructor never to have left the championship.</p>
+      </div>
+      <div data-anim="up">
+        <span class="cmyk-num" data-count="1">
+          <span class="paper">0</span>
+          <span class="plate plate-c" aria-hidden="true">0</span>
+          <span class="plate plate-m" aria-hidden="true">0</span>
+          <span class="plate plate-y" aria-hidden="true">0</span>
+        </span>
+        <p class="body-copy">Factory. Every car leaves through the same gate on Via Abetone Inferiore.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="press-rule" data-rule aria-hidden="true">
+    <span class="press-rule__line"></span>
+    <span class="press-rule__bar"></span>
+    <svg class="press-rule__mark" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><circle cx="12" cy="12" r="2.6"></circle><path d="M12 .5v6M12 17.5v6M.5 12h6M17.5 12h6"></path></svg>
+    <span class="press-rule__bar"></span>
+    <span class="press-rule__line"></span>
+  </div>
+
+  <!-- ────────────────────────────── heritage ───────────────────────────── -->
+  <section id="heritage" class="heritage">
+    <span class="kicker" data-anim="up">Heritage</span>
+    <h2 class="display" style="margin-bottom:42px" data-anim="up">Seventy-nine years, told in eight lines</h2>
+    <div class="heritage__cols">
+      <div class="heritage__col">
+        <span data-anim="year">1947</span>
+        <p class="body-copy" data-anim="up">The 125 S leaves the works at Maranello — twelve cylinders, one and a half litres, a first win within a fortnight.</p>
+        <span data-anim="year">1962</span>
+        <p class="body-copy" data-anim="up">The 250 GTO: thirty-six cars, a body shaped by wind and instinct, and the most valuable silhouette in motoring.</p>
+        <span data-anim="year">1984</span>
+        <p class="body-copy" data-anim="up">The Testarossa's side strakes turn engineering necessity into the decade's most quoted line.</p>
+        <span data-anim="year">1987</span>
+        <p class="body-copy" data-anim="up">The F40 — the last car signed off by the founder, and the first road car to admit it was a race car.</p>
+      </div>
+      <div class="heritage__col">
+        <span data-anim="year">2002</span>
+        <p class="body-copy" data-anim="up">The Enzo brings the paddle shift, the carbon tub and the aerodynamics of a Grand Prix car to the public road.</p>
+        <span data-anim="year">2013</span>
+        <p class="body-copy" data-anim="up">LaFerrari couples the twelve to a kinetic recovery system: hybridisation arrives as a performance argument, not a compromise.</p>
+        <span data-anim="year">2019</span>
+        <p class="body-copy" data-anim="up">The SF90 Stradale takes the name of the ninetieth racing season and a thousand horsepower with it.</p>
+        <span data-anim="year">2024</span>
+        <p class="body-copy" data-anim="up">The F80 returns the halo car to forced induction and active aerodynamics, with Le Mans freshly won again.</p>
+      </div>
+    </div>
+
+    <div class="heritage__plates">
+      <figure class="cmyk" data-anim="card">
+        <div class="print" style="aspect-ratio:3/2"><img src="assets/heritage-250gto.jpg" alt="Ferrari 250 GTO, the 1962 competition berlinetta."></div>
+        <figcaption>250 GTO · 1962 · thirty-six built</figcaption>
+      </figure>
+      <figure class="cmyk" data-anim="card">
+        <div class="print" style="aspect-ratio:3/2"><img src="assets/heritage-f40.jpg" alt="Ferrari F40 photographed head-on."></div>
+        <figcaption>F40 · 1987 · the founder's last signature</figcaption>
+      </figure>
+      <figure class="cmyk" data-anim="card">
+        <div class="print" style="aspect-ratio:3/2"><img src="assets/gal-fiorano.jpg" alt="A Ferrari 312 PB under test at the Fiorano circuit in 1972."></div>
+        <figcaption>Fiorano · 1972 · the private circuit opens</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="press-rule" data-rule aria-hidden="true">
+    <span class="press-rule__line"></span>
+    <span class="press-rule__bar"></span>
+    <svg class="press-rule__mark" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><circle cx="12" cy="12" r="2.6"></circle><path d="M12 .5v6M12 17.5v6M.5 12h6M17.5 12h6"></path></svg>
+    <span class="press-rule__bar"></span>
+    <span class="press-rule__line"></span>
+  </div>
+
+  <!-- ──────────────────────────── technology ───────────────────────────── -->
+  <section class="tech">
+    <div>
+      <span class="kicker" data-anim="up">Technology &amp; innovation</span>
+      <h2 class="display" data-anim="up">Everything learned on Sunday, delivered on Monday</h2>
+      <p class="body-copy" style="margin-top:20px;max-width:48ch;text-align:justify;hyphens:auto" data-anim="up">The tub is autoclaved carbon, laid up by hand in Maranello. Torque vectoring across the front axle, brake-by-wire, a six-dimensional dynamic sensor and a wing that changes its own mind at two hundred: all of it arrived in a race car first, and all of it is measured in tenths at Fiorano before a customer sees it.</p>
+      <div class="tags">
+        <span class="tag tag-accent" data-anim="tag">Carbon monocoque</span>
+        <span class="tag tag-accent" data-anim="tag">e-4WD</span>
+        <span class="tag tag-accent" data-anim="tag">Active aero</span>
+        <span class="tag tag-accent" data-anim="tag">Brake-by-wire</span>
+      </div>
+    </div>
+    <figure class="cmyk" data-anim="card">
+      <div class="print" style="aspect-ratio:3/2" data-parallax="0.08"><img src="assets/tech-v12.jpg" alt="A Ferrari V12 engine on a stand in a showroom, cam covers in red crackle finish."></div>
+    </figure>
+  </section>
+</div>
+
+<!-- ────────────────────────── the factory bleed ─────────────────────────── -->
+<figure class="cmyk bleed" aria-label="The Ferrari factory at Maranello">
+  <div class="print" data-parallax="0.16"><img src="assets/factory-maranello.jpg" alt="The Ferrari factory entrance at Maranello, Modena."></div>
+  <figcaption class="bleed__caption">
+    <strong data-anim="up">One gate. Every car.</strong>
+    <span data-anim="up">Via Abetone Inferiore 4 · Maranello · Modena</span>
+  </figcaption>
+</figure>
+
+<div class="wrap">
+  <!-- ─────────────────────────────── gallery ───────────────────────────── -->
+  <section id="gallery" class="gallery">
+    <span class="kicker" data-anim="up">Gallery</span>
+    <div class="gallery__grid">
+      <figure class="cmyk" data-anim="card">
+        <div class="print"><img src="assets/gal-wheel.jpg" alt="Forged wheel and yellow brake caliper of a Ferrari 458 Speciale."></div>
+        <figcaption>Forged wheel · carbon-ceramic disc</figcaption>
+      </figure>
+      <figure class="cmyk" data-anim="card">
+        <div class="print"><img src="assets/gal-interior.jpg" alt="Ferrari cockpit: carbon steering wheel, engine start button and yellow rev counter."></div>
+        <figcaption>Cockpit · manettino and the yellow dial</figcaption>
+      </figure>
+      <figure class="cmyk" data-anim="card">
+        <div class="print"><img src="assets/gal-track.jpg" alt="A Ferrari 296 GT3 racing car on track at Suzuka."></div>
+        <figcaption>296 GT3 · Suzuka</figcaption>
+      </figure>
+      <figure class="cmyk" data-anim="card">
+        <div class="print"><img src="assets/model-12cilindri.jpg" alt="Ferrari 12Cilindri in red, low three-quarter view."></div>
+        <figcaption>12Cilindri · the front-engined argument</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="press-rule" data-rule aria-hidden="true">
+    <span class="press-rule__line"></span>
+    <span class="press-rule__bar"></span>
+    <svg class="press-rule__mark" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><circle cx="12" cy="12" r="2.6"></circle><path d="M12 .5v6M12 17.5v6M.5 12h6M17.5 12h6"></path></svg>
+    <span class="press-rule__bar"></span>
+    <span class="press-rule__line"></span>
+  </div>
+
+  <!-- ──────────────────────────────── quotes ───────────────────────────── -->
+  <section class="quotes">
+    <figure data-anim="up">
+      <blockquote>“I have owned faster cars. I have never owned one that made the drive home from the office feel like an occasion.”</blockquote>
+      <figcaption>— A. Ferrante, 296 GTB, Milan</figcaption>
+    </figure>
+    <figure data-anim="up">
+      <blockquote>“They asked which colour. Then they asked which stitching. Then they asked what the car was for. Nobody has ever asked me that.”</blockquote>
+      <figcaption>— K. Lindqvist, Tailor Made client, Stockholm</figcaption>
+    </figure>
+  </section>
+
+  <div class="press-rule" data-rule aria-hidden="true">
+    <span class="press-rule__line"></span>
+    <span class="press-rule__bar"></span>
+    <svg class="press-rule__mark" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"></circle><circle cx="12" cy="12" r="2.6"></circle><path d="M12 .5v6M12 17.5v6M.5 12h6M17.5 12h6"></path></svg>
+    <span class="press-rule__bar"></span>
+    <span class="press-rule__line"></span>
+  </div>
+
+  <!-- ─────────────────────────────── contact ───────────────────────────── -->
+  <section id="contact" class="contact">
+    <h3 data-anim="up">Book a viewing at your nearest official dealer</h3>
+    <p class="body-copy" style="margin-top:20px;max-width:58ch" data-anim="up">Configuration, allocation and Tailor Made appointments. We write once a month, in the voice of the workshop rather than the marketing department.</p>
+    <form class="contact__form" id="signup" data-anim="up" novalidate>
+      <input class="input" type="email" id="signup-email" placeholder="you@example.com" aria-label="Email address" style="flex:1;min-height:36px" required>
+      <button type="submit" class="btn btn-primary magnetic" style="min-height:36px">Request the file</button>
+    </form>
+    <p class="contact__note" id="signup-note" role="status"></p>
+
+    <div class="contact__dealers">
+      <div data-anim="up"><h4>Maranello</h4><p>Via Abetone Inferiore 4<br>Allocation &amp; Tailor Made</p></div>
+      <div data-anim="up"><h4>Milan</h4><p>Viale Certosa 86<br>Approved &amp; Classiche</p></div>
+      <div data-anim="up"><h4>London</h4><p>Berkeley Square W1J<br>Showroom &amp; service</p></div>
+      <div data-anim="up"><h4>Tunis</h4><p>Les Berges du Lac II<br>By appointment</p></div>
+    </div>
+  </section>
+
+  <footer class="site-foot">
+    <span style="margin-right:auto">Concept landing page — an independent editorial interpretation, not an official communication.</span>
+    <div class="site-foot__social">
+      <a href="#top">Instagram</a>
+      <a href="#top">YouTube</a>
+      <a href="#top">X</a>
+    </div>
+  </footer>
+
+  <p class="credits">
+    Photographs from Wikimedia Commons, printed here as four-colour separations —
+    <a href="https://commons.wikimedia.org/wiki/File:Ferrari_SF90_Stradale_Mayfair.jpg">SF90 Stradale</a> and
+    <a href="https://commons.wikimedia.org/wiki/File:2021_Ferrari_SF90_Stradale_sf25.jpg">SF90 profile</a> by Calreyn88 (CC BY 4.0);
+    <a href="https://commons.wikimedia.org/wiki/File:Ferrari_296_GTB_1X7A6377.jpg">296 GTB</a> by Alexander Migl (CC BY-SA 4.0);
+    <a href="https://commons.wikimedia.org/wiki/File:2025_Ferrari_12Cilindri.jpg">12Cilindri</a> by Oleg Yunakov (CC BY-SA 4.0);
+    <a href="https://commons.wikimedia.org/wiki/File:Ferrari_Purosangue_IMG_9550.jpg">Purosangue</a> by Alexander-93 (CC BY-SA 4.0);
+    <a href="https://commons.wikimedia.org/wiki/File:Ferrari_Tipo_F140C_V12_engine_display.jpg">V12 engine</a> by Mr.choppers (CC BY-SA 3.0);
+    <a href="https://commons.wikimedia.org/wiki/File:The_tire_wheel_of_Ferrari_458_Speciale.JPG">458 Speciale wheel</a> and
+    <a href="https://commons.wikimedia.org/wiki/File:No.45_PONOS_FERRARI_296_after_2024_SUZUKA_GT_300km_RACE_GRAND_FINAL.jpg">296 GT3 at Suzuka</a> by Tokumeigakarinoaoshima (CC0);
+    <a href="https://commons.wikimedia.org/wiki/File:Interior_Ferrari_California_Steering_Wheel.jpg">cockpit</a> by andy_carter (CC BY 2.0);
+    <a href="https://commons.wikimedia.org/wiki/File:1990_Ferrari_F40_front.jpg">F40</a> by TTTNIS (CC0);
+    <a href="https://commons.wikimedia.org/wiki/File:1962_Ferrari_250_GTO_34_2.jpg">250 GTO</a> (CC BY-SA 3.0);
+    <a href="https://commons.wikimedia.org/wiki/File:Munari_testing_Ferrari_312_PB_-_Fiorano_Circuit_-_April_1972.jpg">Fiorano 1972</a> (public domain);
+    <a href="https://commons.wikimedia.org/wiki/File:Ferrari_Factory_(Maranello,_Modena)_in_2018.04.jpg">the factory</a> by CAPTAIN RAJU (CC BY-SA 4.0).
+    Ferrari and the Cavallino Rampante are trademarks of Ferrari S.p.A.; this page is an unaffiliated design study.
+  </p>
+</div>
+</main>
+
+<!-- the drifting badge: a stylised shop shield — yellow field, tricolore bar,
+     Scuderia initials. Not the Cavallino Rampante, which is Ferrari's mark. -->
+<template id="emblem-tpl">
+  <svg class="emblem" viewBox="0 0 40 48" aria-hidden="true">
+    <path class="emblem__field" d="M3 3h34v27c0 9-11 15-17 17-6-2-17-8-17-17z"></path>
+    <rect class="emblem__green" x="6.5" y="6.5" width="9" height="4.5"></rect>
+    <rect class="emblem__white" x="15.5" y="6.5" width="9" height="4.5"></rect>
+    <rect class="emblem__red" x="24.5" y="6.5" width="9" height="4.5"></rect>
+    <text class="emblem__mark" x="20" y="35" text-anchor="middle" font-size="18">SF</text>
+  </svg>
+</template>
+
+<script src="print-plates.js"></script>
+<script src="assets/vendor/anime.umd.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
