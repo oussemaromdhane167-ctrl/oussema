@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Paths assume the portfolio folder is the deploy root, so this page lives at
-     /agency/ and the three demos sit beside it. Swap the host for your own. -->
+<!-- The portfolio is the deploy root, with the three demos as sibling folders. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://buildario.studio/agency/</loc>
+    <loc>https://buildario.studio/</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
