@@ -3,25 +3,25 @@
      /agency/ and the three demos sit beside it. Swap the host for your own. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://arclight.studio/agency/</loc>
+    <loc>https://buildario.studio/agency/</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://arclight.studio/gym/</loc>
+    <loc>https://buildario.studio/gym/</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://arclight.studio/porsche/</loc>
+    <loc>https://buildario.studio/porsche/</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://arclight.studio/ferrari/</loc>
+    <loc>https://buildario.studio/ferrari/</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>

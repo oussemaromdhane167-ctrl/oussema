@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Arclight — motion layer
+   Buildario — motion layer
    Vanilla JS, no dependencies. Every effect degrades to a static page.
 
    Deliberately a classic deferred script, not type="module". There is nothing
@@ -301,4 +301,4 @@ if (navToggle && navPanel && navScrim) {
 /* Tells the failsafe watchdog in index.html that the motion layer booted. If
    this line is never reached, the watchdog drops the `js` class and the page
    renders fully visible with the loader gone. */
-window.__arclightReady = true;
+window.__buildarioReady = true;
