@@ -1,10 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Buildario">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#4F8CFF"/>
-      <stop offset="1" stop-color="#7B5CFF"/>
-    </linearGradient>
-  </defs>
+  <!-- "Notch" — a frame that has shipped a module out of its corner.
+       Geometry from the Buildario Logo Concepts brief (concept 04), drawn on a
+       48-unit grid and mapped into this 64-unit tile: scale 1.0556, offset
+       6.667, so the mark spans 13..51 with even padding on all sides.
+       Inks are the brief's dark-surface pair, not its light-ground pair: this
+       tile is #090909, and the detached module is only ~2.5px at a 16px
+       favicon, so it needs the lighter purple to stay legible. -->
   <rect width="64" height="64" rx="14" fill="#090909"/>
-  <path d="M32 13 L48 49 H40.5 L32 29.5 L23.5 49 H16 Z" fill="url(#g)"/>
+  <path d="M26.72 13 H51 V51 H13 V26.72 H26.72 Z" fill="#5B8CF5"/>
+  <rect x="13" y="13" width="10.56" height="10.56" rx="1.06" fill="#A78BFA"/>
 </svg>
