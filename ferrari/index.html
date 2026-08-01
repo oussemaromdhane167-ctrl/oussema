@@ -6,6 +6,9 @@
 <title>Ferrari — Engineering emotion</title>
 <meta name="description" content="A concept landing page for Ferrari, printed on the Broadsheet design system: four-colour process separations, misregistered plate headlines and a warm press sheet.">
 <script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -73,7 +76,7 @@
 
     <figure class="cmyk hero__figure" data-anim="hero-fig">
       <div class="print" style="aspect-ratio:16/9" data-parallax="0.12">
-        <img src="assets/hero-sf90.jpg" alt="Ferrari SF90 Stradale in Rosso Corsa, three-quarter front, parked on a Mayfair street.">
+        <img src="assets/hero-sf90.jpg" fetchpriority="high" decoding="async" alt="Ferrari SF90 Stradale in Rosso Corsa, three-quarter front, parked on a Mayfair street.">
       </div>
     </figure>
 
@@ -170,7 +173,7 @@
 
       <div class="model" data-anim="card">
         <figure class="cmyk">
-          <div class="print" style="aspect-ratio:4/3"><img src="assets/model-sf90.jpg" alt="Ferrari SF90 Stradale seen in profile."></div>
+          <div class="print" style="aspect-ratio:4/3"><img src="assets/model-sf90.jpg" loading="lazy" decoding="async" alt="Ferrari SF90 Stradale seen in profile."></div>
         </figure>
         <h3>SF90 Stradale</h3>
         <p class="model__spec">Hybrid V8 · 1,000 cv</p>
@@ -179,7 +182,7 @@
 
       <div class="model" data-anim="card">
         <figure class="cmyk">
-          <div class="print" style="aspect-ratio:4/3"><img src="assets/model-296.jpg" alt="Ferrari 296 GTB in Giallo Modena, three-quarter front."></div>
+          <div class="print" style="aspect-ratio:4/3"><img src="assets/model-296.jpg" loading="lazy" decoding="async" alt="Ferrari 296 GTB in Giallo Modena, three-quarter front."></div>
         </figure>
         <h3>296 GTB</h3>
         <p class="model__spec">Hybrid V6 · 830 cv</p>
@@ -188,7 +191,7 @@
 
       <div class="model" data-anim="card">
         <figure class="cmyk">
-          <div class="print" style="aspect-ratio:4/3"><img src="assets/model-12cilindri.jpg" alt="Ferrari 12Cilindri in red, three-quarter front, on a city forecourt."></div>
+          <div class="print" style="aspect-ratio:4/3"><img src="assets/model-12cilindri.jpg" loading="lazy" decoding="async" alt="Ferrari 12Cilindri in red, three-quarter front, on a city forecourt."></div>
         </figure>
         <h3>12Cilindri</h3>
         <p class="model__spec">Naturally aspirated V12 · 830 cv</p>
@@ -197,7 +200,7 @@
 
       <div class="model" data-anim="card">
         <figure class="cmyk">
-          <div class="print" style="aspect-ratio:4/3"><img src="assets/model-purosangue.jpg" alt="Ferrari Purosangue, four-door, three-quarter front."></div>
+          <div class="print" style="aspect-ratio:4/3"><img src="assets/model-purosangue.jpg" loading="lazy" decoding="async" alt="Ferrari Purosangue, four-door, three-quarter front."></div>
         </figure>
         <h3>Purosangue</h3>
         <p class="model__spec">V12 · four doors · 725 cv</p>
@@ -295,15 +298,15 @@
 
     <div class="heritage__plates">
       <figure class="cmyk" data-anim="card">
-        <div class="print" style="aspect-ratio:3/2"><img src="assets/heritage-250gto.jpg" alt="Ferrari 250 GTO, the 1962 competition berlinetta."></div>
+        <div class="print" style="aspect-ratio:3/2"><img src="assets/heritage-250gto.jpg" loading="lazy" decoding="async" alt="Ferrari 250 GTO, the 1962 competition berlinetta."></div>
         <figcaption>250 GTO · 1962 · thirty-six built</figcaption>
       </figure>
       <figure class="cmyk" data-anim="card">
-        <div class="print" style="aspect-ratio:3/2"><img src="assets/heritage-f40.jpg" alt="Ferrari F40 photographed head-on."></div>
+        <div class="print" style="aspect-ratio:3/2"><img src="assets/heritage-f40.jpg" loading="lazy" decoding="async" alt="Ferrari F40 photographed head-on."></div>
         <figcaption>F40 · 1987 · the founder's last signature</figcaption>
       </figure>
       <figure class="cmyk" data-anim="card">
-        <div class="print" style="aspect-ratio:3/2"><img src="assets/gal-fiorano.jpg" alt="A Ferrari 312 PB under test at the Fiorano circuit in 1972."></div>
+        <div class="print" style="aspect-ratio:3/2"><img src="assets/gal-fiorano.jpg" loading="lazy" decoding="async" alt="A Ferrari 312 PB under test at the Fiorano circuit in 1972."></div>
         <figcaption>Fiorano · 1972 · the private circuit opens</figcaption>
       </figure>
     </div>
@@ -331,14 +334,14 @@
       </div>
     </div>
     <figure class="cmyk" data-anim="card">
-      <div class="print" style="aspect-ratio:3/2" data-parallax="0.08"><img src="assets/tech-v12.jpg" alt="A Ferrari V12 engine on a stand in a showroom, cam covers in red crackle finish."></div>
+      <div class="print" style="aspect-ratio:3/2" data-parallax="0.08"><img src="assets/tech-v12.jpg" loading="lazy" decoding="async" alt="A Ferrari V12 engine on a stand in a showroom, cam covers in red crackle finish."></div>
     </figure>
   </section>
 </div>
 
 <!-- ────────────────────────── the factory bleed ─────────────────────────── -->
 <figure class="cmyk bleed" aria-label="The Ferrari factory at Maranello">
-  <div class="print" data-parallax="0.16"><img src="assets/factory-maranello.jpg" alt="The Ferrari factory entrance at Maranello, Modena."></div>
+  <div class="print" data-parallax="0.16"><img src="assets/factory-maranello.jpg" loading="lazy" decoding="async" alt="The Ferrari factory entrance at Maranello, Modena."></div>
   <figcaption class="bleed__caption">
     <strong data-anim="up">One gate. Every car.</strong>
     <span data-anim="up">Via Abetone Inferiore 4 · Maranello · Modena</span>
@@ -351,19 +354,19 @@
     <span class="kicker" data-anim="up">Gallery</span>
     <div class="gallery__grid">
       <figure class="cmyk" data-anim="card">
-        <div class="print"><img src="assets/gal-wheel.jpg" alt="Forged wheel and yellow brake caliper of a Ferrari 458 Speciale."></div>
+        <div class="print"><img src="assets/gal-wheel.jpg" loading="lazy" decoding="async" alt="Forged wheel and yellow brake caliper of a Ferrari 458 Speciale."></div>
         <figcaption>Forged wheel · carbon-ceramic disc</figcaption>
       </figure>
       <figure class="cmyk" data-anim="card">
-        <div class="print"><img src="assets/gal-interior.jpg" alt="Ferrari cockpit: carbon steering wheel, engine start button and yellow rev counter."></div>
+        <div class="print"><img src="assets/gal-interior.jpg" loading="lazy" decoding="async" alt="Ferrari cockpit: carbon steering wheel, engine start button and yellow rev counter."></div>
         <figcaption>Cockpit · manettino and the yellow dial</figcaption>
       </figure>
       <figure class="cmyk" data-anim="card">
-        <div class="print"><img src="assets/gal-track.jpg" alt="A Ferrari 296 GT3 racing car on track at Suzuka."></div>
+        <div class="print"><img src="assets/gal-track.jpg" loading="lazy" decoding="async" alt="A Ferrari 296 GT3 racing car on track at Suzuka."></div>
         <figcaption>296 GT3 · Suzuka</figcaption>
       </figure>
       <figure class="cmyk" data-anim="card">
-        <div class="print"><img src="assets/model-12cilindri.jpg" alt="Ferrari 12Cilindri in red, low three-quarter view."></div>
+        <div class="print"><img src="assets/model-12cilindri.jpg" loading="lazy" decoding="async" alt="Ferrari 12Cilindri in red, low three-quarter view."></div>
         <figcaption>12Cilindri · the front-engined argument</figcaption>
       </figure>
     </div>

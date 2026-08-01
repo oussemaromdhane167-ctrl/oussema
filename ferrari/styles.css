@@ -12,7 +12,10 @@
    Part 2 is this page's own layout, motion scaffolding and chrome.
    ══════════════════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap');
+/* The font is loaded from index.html with preconnect + <link>, not @import:
+   an @import here cannot start downloading until this stylesheet has itself
+   been fetched and parsed, which serialises two round trips before any text
+   can paint. */
 
 /* ─────────────────────────── 1. Broadsheet tokens ─────────────────────── */
 
