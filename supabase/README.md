@@ -58,9 +58,18 @@ Authentication → URL Configuration:
 - **Redirect URLs**: `https://buildario.studio/login/**`, and
   `http://localhost:8000/login/**` while developing.
 
-Leave *Confirm email* on. Supabase's built-in mailer is rate-limited and meant
-for testing — before you send real clients through signup, add your own SMTP
-under Authentication → Emails.
+Leave *Confirm email* on. Supabase's built-in mailer is rate-limited (a handful
+of messages an hour) and meant for testing — before you send real clients
+through signup, point Authentication → Emails → SMTP Settings at the studio
+mailbox:
+
+- Host `smtp.gmail.com`, port `465`, username `buildario.studio@gmail.com`
+- Password: a Google **app password**, not the account password. Google account
+  → Security → 2-Step Verification (must be on) → App passwords.
+- Sender email `buildario.studio@gmail.com`, sender name `Buildario`.
+
+Gmail caps a free account at roughly 500 sent messages a day, which is far more
+headroom than signup and reset links will ever need.
 
 **5. Make yourself the admin**
 

@@ -349,7 +349,7 @@ if (briefForm) {
 
     const config = window.BUILDARIO_SUPABASE || {};
     if (!config.configured) {
-      say('The form is not connected yet — email hello@buildario.studio and it will reach me just the same.', 'info');
+      say('The form is not connected yet — email buildario.studio@gmail.com and it will reach me just the same.', 'info');
       return;
     }
 
@@ -380,7 +380,7 @@ if (briefForm) {
     } catch (error) {
       say(
         /failed to fetch|networkerror/i.test(error.message)
-          ? 'Could not reach the server. Check your connection, or email hello@buildario.studio.'
+          ? 'Could not reach the server. Check your connection, or email buildario.studio@gmail.com.'
           : error.message,
         'error'
       );
