@@ -55,5 +55,16 @@ export function friendlyError(error) {
   if (/row-level security|permission denied|42501/i.test(message)) {
     return 'You do not have access to that.';
   }
-  return message;
+  if (/too many requests|rate limit/i.test(message)) {
+    return 'Too many attempts in a row. Wait a minute and try again.';
+  }
+  if (/database error|unexpected_failure|internal server error|^\s*5\d\d\s*$/i.test(message)) {
+    return 'Your account could not be created just now — this one is on me, not you. ' +
+           'Email buildario.studio@gmail.com and I will set it up by hand.';
+  }
+
+  // Anything unrecognised is a database or platform message written for a
+  // developer. A client should never be shown a constraint name or a SQL
+  // error code, so unknown failures get a plain apology and a way through.
+  return 'Something went wrong on my side. Try again, or email buildario.studio@gmail.com.';
 }
