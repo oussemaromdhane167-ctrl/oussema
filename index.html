@@ -59,7 +59,9 @@
     <a href="#process" class="nav-link">Process</a>
     <a href="#why" class="nav-link">About</a>
     <a href="#contact" class="nav-link">Contact</a>
-    <a href="login/" class="nav-link">Client Login</a>
+    <!-- Hidden by main.js until the backend is configured: a sign-in that
+         cannot sign anyone in is worse than no link at all. -->
+    <a href="login/" class="nav-link" id="clientLogin" hidden>Client Login</a>
     <a href="#contact" class="btn btn-primary drawer-cta">Start a Project <span aria-hidden="true">→</span></a>
   </div>
 
@@ -440,10 +442,10 @@
           <label for="briefBudget">Budget</label>
           <select id="briefBudget" name="budget">
             <option value="">Not sure yet</option>
-            <option value="Under $1,000">Under $1,000</option>
-            <option value="$1,000 – $3,000">$1,000 – $3,000</option>
-            <option value="$3,000 – $6,000">$3,000 – $6,000</option>
-            <option value="$6,000+">$6,000+</option>
+            <option value="500 TND">500 TND</option>
+            <option value="500 – 1000 TND">500 – 1000 TND</option>
+            <option value="1000 – 1500 TND">1000 – 1500 TND</option>
+            <option value="+1500 TND">+1500 TND</option>
           </select>
         </div>
       </div>
@@ -465,8 +467,8 @@
     </form>
 
     <p class="contact-alt">
-      Prefer email? <a href="mailto:buildario.studio@gmail.com">buildario.studio@gmail.com</a>
-      · Already a client? <a href="login/">Sign in</a>
+      Prefer email? <a href="mailto:buildario.studio@gmail.com">buildario.studio@gmail.com</a><span
+        id="clientLoginAlt" hidden> · Already a client? <a href="login/">Sign in</a></span>
     </p>
   </div>
 </section>

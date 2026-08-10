@@ -32,8 +32,10 @@ export function friendlyError(error) {
   if (!error) return '';
   const message = String(error.message || error);
 
+  // Never leak setup instructions into a client's face. What went wrong here is
+  // the studio's problem; all they need is another way to reach it.
   if (!isConfigured) {
-    return 'The backend is not configured yet — add your Supabase URL and anon key to app/config.js.';
+    return 'The client area is temporarily unavailable. Email buildario.studio@gmail.com and I will sort it out.';
   }
   if (/failed to fetch|networkerror/i.test(message)) {
     return 'Could not reach the server. Check your connection and try again.';

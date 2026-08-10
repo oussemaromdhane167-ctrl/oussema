@@ -5,11 +5,26 @@
    new password after following that link.
    ========================================================================== */
 
-import { $, pending, setMessage } from '../ui.js';
+import { $, $$, pending, setMessage } from '../ui.js';
+import { isConfigured } from '../supabase.js';
 import {
   signIn, signUp, sendPasswordReset, updatePassword,
   getSession, getProfile, onAuthChange, friendlyError
 } from '../auth.js';
+
+/* Someone who follows the link before the backend is live gets a plain
+   explanation and a way to reach a human, not three forms that fail on submit. */
+if (!isConfigured) {
+  $$('#viewAuth form, #viewAuth .tabs, #viewForgot, #viewRecovery').forEach((el) => { el.hidden = true; });
+  $('.auth-card').insertAdjacentHTML('afterbegin', `
+    <h1>Client area opening soon.</h1>
+    <p>Project timelines, files, and messages live here once your project starts.
+       In the meantime, email
+       <a href="mailto:buildario.studio@gmail.com">buildario.studio@gmail.com</a>
+       and you will get me directly.</p>
+    <a class="btn btn-primary" href="../">Back to the site</a>
+  `);
+}
 
 const views = {
   auth: $('#viewAuth'),

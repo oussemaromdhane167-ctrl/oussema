@@ -310,6 +310,18 @@ if (navToggle && navPanel && navScrim) {
    only write the anon key is allowed anywhere in the database.
    ====================================================================== */
 
+const STUDIO_EMAIL = 'buildario.studio@gmail.com';
+
+/* The client area only exists once the database is reachable. Until then both
+   entrances stay hidden rather than leading to a sign-in that cannot work. */
+const config = window.BUILDARIO_SUPABASE || {};
+if (config.configured) {
+  const loginLink = $('#clientLogin');
+  const loginAlt = $('#clientLoginAlt');
+  if (loginLink) loginLink.hidden = false;
+  if (loginAlt) loginAlt.hidden = false;
+}
+
 const briefForm = $('#briefForm');
 
 if (briefForm) {
@@ -321,6 +333,25 @@ if (briefForm) {
     briefMsg.textContent = text;
     briefMsg.className = 'form-msg form-msg-' + kind;
     briefMsg.hidden = !text;
+  };
+
+  /** Composes the brief as an email the visitor sends from their own client.
+      It is the fallback for every path where the database cannot take the
+      submission — unconfigured, offline, or refused — so the form is never a
+      dead end that loses what someone just typed. */
+  const mailtoBrief = (payload) => {
+    const body = [
+      'Name: ' + payload.p_name,
+      'Email: ' + payload.p_email,
+      payload.p_company ? 'Company: ' + payload.p_company : '',
+      payload.p_budget ? 'Budget: ' + payload.p_budget : '',
+      '',
+      payload.p_message
+    ].filter(Boolean).join('\n');
+
+    return 'mailto:' + STUDIO_EMAIL +
+      '?subject=' + encodeURIComponent('New brief — ' + payload.p_name) +
+      '&body=' + encodeURIComponent(body);
   };
 
   briefForm.addEventListener('submit', async (e) => {
@@ -347,9 +378,10 @@ if (briefForm) {
     if (!EMAIL_RE.test(payload.p_email))  return say('Please enter a valid email address.', 'error');
     if (payload.p_message.length < 10)    return say('Please describe your project in a little more detail.', 'error');
 
-    const config = window.BUILDARIO_SUPABASE || {};
     if (!config.configured) {
-      say('The form is not connected yet — email buildario.studio@gmail.com and it will reach me just the same.', 'info');
+      window.location.href = mailtoBrief(payload);
+      briefForm.reset();
+      say('Opening your email app with the brief filled in — press send and it lands in my inbox.', 'success');
       return;
     }
 
@@ -378,12 +410,15 @@ if (briefForm) {
       briefForm.reset();
       say('Thanks — your brief is in. I reply to everything within a day or two.', 'success');
     } catch (error) {
-      say(
-        /failed to fetch|networkerror/i.test(error.message)
-          ? 'Could not reach the server. Check your connection, or email buildario.studio@gmail.com.'
-          : error.message,
-        'error'
-      );
+      // A refusal from submit_lead is written for the visitor — show it. A
+      // network failure is not their problem to read about, so hand the brief
+      // to their mail client instead of losing it.
+      if (/failed to fetch|networkerror/i.test(error.message)) {
+        window.location.href = mailtoBrief(payload);
+        say('The server did not answer, so your email app is opening with the brief instead — press send.', 'info');
+      } else {
+        say(error.message, 'error');
+      }
     } finally {
       briefSubmit.disabled = false;
       briefSubmit.innerHTML = label;
