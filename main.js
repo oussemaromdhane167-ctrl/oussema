@@ -335,23 +335,64 @@ if (briefForm) {
     briefMsg.hidden = !text;
   };
 
-  /** Composes the brief as an email the visitor sends from their own client.
-      It is the fallback for every path where the database cannot take the
-      submission — unconfigured, offline, or refused — so the form is never a
-      dead end that loses what someone just typed. */
-  const mailtoBrief = (payload) => {
-    const body = [
-      'Name: ' + payload.p_name,
-      'Email: ' + payload.p_email,
-      payload.p_company ? 'Company: ' + payload.p_company : '',
-      payload.p_budget ? 'Budget: ' + payload.p_budget : '',
-      '',
-      payload.p_message
-    ].filter(Boolean).join('\n');
+  /** The message body, as plain text — both the mail draft and the clipboard
+      copy are built from this. */
+  const briefText = (payload) => [
+    'Name: ' + payload.p_name,
+    'Email: ' + payload.p_email,
+    payload.p_company ? 'Company: ' + payload.p_company : '',
+    payload.p_budget ? 'Budget: ' + payload.p_budget : '',
+    '',
+    payload.p_message
+  ].filter(Boolean).join('\n');
 
-    return 'mailto:' + STUDIO_EMAIL +
+  /**
+   * Hands the brief to the visitor's own mail client, for every path where the
+   * database cannot take it — unconfigured, offline, or unreachable.
+   *
+   * `mailto:` is a request, not a send. It opens a draft the visitor still has
+   * to send themselves, and on a machine with no mail handler registered —
+   * anyone living in webmail — it does nothing visible at all. So this never
+   * claims the message went anywhere, never clears the form, and always offers
+   * the address and a copy button for when nothing opened.
+   */
+  const handOffToMail = (payload, lead) => {
+    const draft = briefText(payload);
+
+    window.location.href = 'mailto:' + STUDIO_EMAIL +
       '?subject=' + encodeURIComponent('New brief — ' + payload.p_name) +
-      '&body=' + encodeURIComponent(body);
+      '&body=' + encodeURIComponent(draft);
+
+    // Static markup only. Nothing the visitor typed is interpolated here — it
+    // travels through the clipboard as text instead.
+    briefMsg.innerHTML = lead +
+      ' Your mail app should open with the brief in it — <strong>press send there</strong>. ' +
+      'Nothing opened? Copy the brief and mail it to ' +
+      '<a href="mailto:' + STUDIO_EMAIL + '">' + STUDIO_EMAIL + '</a>.' +
+      '<button type="button" class="btn btn-outline" id="briefCopy" style="margin-top:14px">Copy the brief</button>';
+    briefMsg.className = 'form-msg form-msg-info';
+    briefMsg.hidden = false;
+
+    const copyButton = $('#briefCopy');
+    copyButton.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(draft);
+        copyButton.textContent = 'Copied';
+      } catch (_) {
+        // clipboard API needs a secure context and a permission; fall back to
+        // the old selection trick, which needs neither
+        const scratch = document.createElement('textarea');
+        scratch.value = draft;
+        scratch.setAttribute('readonly', '');
+        scratch.style.position = 'fixed';
+        scratch.style.opacity = '0';
+        document.body.appendChild(scratch);
+        scratch.select();
+        const copied = document.execCommand('copy');
+        scratch.remove();
+        copyButton.textContent = copied ? 'Copied' : 'Press Ctrl+C after selecting your message';
+      }
+    });
   };
 
   briefForm.addEventListener('submit', async (e) => {
@@ -379,9 +420,7 @@ if (briefForm) {
     if (payload.p_message.length < 10)    return say('Please describe your project in a little more detail.', 'error');
 
     if (!config.configured) {
-      window.location.href = mailtoBrief(payload);
-      briefForm.reset();
-      say('Opening your email app with the brief filled in — press send and it lands in my inbox.', 'success');
+      handOffToMail(payload, 'Nearly there.');
       return;
     }
 
@@ -414,8 +453,7 @@ if (briefForm) {
       // network failure is not their problem to read about, so hand the brief
       // to their mail client instead of losing it.
       if (/failed to fetch|networkerror/i.test(error.message)) {
-        window.location.href = mailtoBrief(payload);
-        say('The server did not answer, so your email app is opening with the brief instead — press send.', 'info');
+        handOffToMail(payload, 'The server did not answer.');
       } else {
         say(error.message, 'error');
       }
