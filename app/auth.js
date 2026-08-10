@@ -37,7 +37,36 @@ export async function getProfile({ refresh = false } = {}) {
     .maybeSingle();
 
   if (error) throw error;
+
+  // The signup trigger creates this row, but it is deliberately non-fatal: an
+  // account can exist without one. Rather than showing an empty dashboard,
+  // create it here — the policy pins the role to 'client', so this grants
+  // nothing beyond what a normal signup would.
+  if (!data) {
+    cachedProfile = await createOwnProfile(user);
+    return cachedProfile;
+  }
+
   cachedProfile = data;
+  return data;
+}
+
+async function createOwnProfile(user) {
+  const metadata = user.user_metadata || {};
+
+  const { data, error } = await supabase
+    .from('profiles')
+    .insert({
+      id: user.id,
+      email: user.email,
+      full_name: (metadata.full_name || '').trim() || null,
+      company: (metadata.company || '').trim() || null,
+      role: 'client'
+    })
+    .select()
+    .single();
+
+  if (error) throw error;
   return data;
 }
 
