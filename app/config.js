@@ -15,8 +15,8 @@
 'use strict';
 
 window.BUILDARIO_SUPABASE = {
-  url: 'https://YOUR-PROJECT-REF.supabase.co',
-  anonKey: 'YOUR-ANON-KEY'
+  url: 'https://wlgyejhocdspxipbkteq.supabase.co',
+  anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndsZ3llamhvY2RzcHhpcGJrdGVxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYyOTk2NTAsImV4cCI6MjEwMTg3NTY1MH0.kC9Gii3Rk8EuT--QumMgeH0NZF1o1cAlEbronY8H35M'
 };
 
 /* A pasted URL often carries a trailing slash, which would build request paths
