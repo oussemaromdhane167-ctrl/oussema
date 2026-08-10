@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio Admin — Buildario</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#090909">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../app/app.css">
+</head>
+<body class="app">
+
+<header class="app-bar">
+  <a class="brand" href="../">Buildario</a>
+  <div class="app-bar-spacer"></div>
+  <nav class="app-bar-links" aria-label="Admin">
+    <a href="./" aria-current="page">Admin</a>
+    <a href="../account/">My account</a>
+  </nav>
+  <div class="app-user">
+    <span id="userName">…</span>
+    <button type="button" class="btn btn-quiet" id="signOut">Sign out</button>
+  </div>
+</header>
+
+<main class="app-main">
+
+  <div class="app-head">
+    <div>
+      <h1>Studio admin</h1>
+      <p>Leads, projects, and every client thread in one place.</p>
+    </div>
+  </div>
+
+  <p class="form-msg" id="pageMsg" hidden></p>
+
+  <div class="stat-grid">
+    <div class="stat"><b id="statNewLeads">—</b><span>New leads</span></div>
+    <div class="stat"><b id="statLeads">—</b><span>Leads total</span></div>
+    <div class="stat"><b id="statActive">—</b><span>Active projects</span></div>
+    <div class="stat"><b id="statClients">—</b><span>Clients</span></div>
+  </div>
+
+  <!-- ===== LEADS ===== -->
+  <section class="panel">
+    <div class="panel-head">
+      <h2>Leads</h2>
+      <div class="spacer"></div>
+      <select id="leadFilter" class="input" style="width:auto">
+        <option value="">All statuses</option>
+        <option value="new">New</option>
+        <option value="contacted">Contacted</option>
+        <option value="qualified">Qualified</option>
+        <option value="won">Won</option>
+        <option value="lost">Lost</option>
+      </select>
+    </div>
+
+    <div class="table-scroll">
+      <table class="data">
+        <thead>
+          <tr>
+            <th scope="col">Received</th>
+            <th scope="col">Who</th>
+            <th scope="col">Brief</th>
+            <th scope="col">Status</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody id="leadRows">
+          <tr><td colspan="5"><p class="empty">Loading…</p></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS ===== -->
+  <div class="cols cols-side" style="margin-top:24px">
+
+    <aside>
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Projects</h2>
+          <div class="spacer"></div>
+          <button type="button" class="btn btn-quiet" id="newProject">New</button>
+        </div>
+        <div class="row-list" id="projectList"><p class="empty">Loading…</p></div>
+      </div>
+    </aside>
+
+    <div>
+      <!-- Create / edit -->
+      <div class="panel">
+        <div class="panel-head">
+          <h2 id="projectFormTitle">New project</h2>
+          <div class="spacer"></div>
+          <button type="button" class="btn btn-danger" id="deleteProject" hidden>Delete project</button>
+        </div>
+
+        <form id="projectForm" novalidate>
+          <p class="form-msg" id="projectMsg" hidden></p>
+
+          <div class="field">
+            <label for="projectClient">Client</label>
+            <select id="projectClient" required></select>
+            <p class="muted small" style="margin-top:6px">
+              The client has to create an account at <a href="../login/">/login</a> before they can be picked here.
+            </p>
+          </div>
+
+          <div class="field">
+            <label for="projectTitle">Title</label>
+            <input type="text" id="projectTitle" required maxlength="160">
+          </div>
+
+          <div class="field">
+            <label for="projectSummary">Summary</label>
+            <textarea id="projectSummary" maxlength="4000" rows="3"></textarea>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="projectStatus">Status</label>
+              <select id="projectStatus">
+                <option value="discovery">Discovery</option>
+                <option value="design">Design</option>
+                <option value="build">Build</option>
+                <option value="review">Review</option>
+                <option value="launched">Launched</option>
+                <option value="archived">Archived</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="projectProgress">Progress %</label>
+              <input type="number" id="projectProgress" min="0" max="100" step="1" value="0">
+            </div>
+            <div class="field">
+              <label for="projectBudget">Budget</label>
+              <input type="number" id="projectBudget" min="0" step="1" placeholder="e.g. 4500">
+            </div>
+            <div class="field">
+              <label for="projectCurrency">Currency</label>
+              <input type="text" id="projectCurrency" maxlength="3" value="USD">
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="projectStarted">Started</label>
+              <input type="date" id="projectStarted">
+            </div>
+            <div class="field">
+              <label for="projectTarget">Target launch</label>
+              <input type="date" id="projectTarget">
+            </div>
+            <div class="field">
+              <label for="projectLive">Live URL</label>
+              <input type="url" id="projectLive" placeholder="https://">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="projectSubmit">Create project</button>
+        </form>
+      </div>
+
+      <!-- Selected project workspace -->
+      <div id="workspace" hidden>
+
+        <div class="panel">
+          <div class="panel-head"><h2>Post an update</h2></div>
+
+          <form id="updateForm" novalidate>
+            <p class="form-msg" id="updateMsg" hidden></p>
+
+            <div class="field">
+              <label for="updateTitle">Title</label>
+              <input type="text" id="updateTitle" required maxlength="160" placeholder="Design review ready">
+            </div>
+            <div class="field">
+              <label for="updateBody">Detail</label>
+              <textarea id="updateBody" rows="3" maxlength="8000"></textarea>
+            </div>
+            <div class="field">
+              <label for="updateProgress">Set progress % <span class="muted small">(optional)</span></label>
+              <input type="number" id="updateProgress" min="0" max="100" step="1">
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="updateSubmit">Post update</button>
+          </form>
+
+          <div class="timeline" id="timeline" style="margin-top:26px"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>Files</h2></div>
+
+          <label class="dropzone" id="dropzone">
+            Drop a file here, or click to choose one
+            <input type="file" id="fileInput">
+          </label>
+
+          <div class="row-list" id="fileList" style="margin-top:16px"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>Thread</h2></div>
+
+          <div class="thread" id="thread"></div>
+
+          <form class="composer" id="composer">
+            <div class="field" style="flex:1;margin:0">
+              <label class="field-label" for="messageBody">Reply</label>
+              <textarea id="messageBody" rows="2" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" id="sendMessage">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="../app/config.js"></script>
+<script type="module" src="../app/pages/admin.js"></script>
+</body>
+</html>

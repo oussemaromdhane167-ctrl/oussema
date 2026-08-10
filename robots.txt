@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /login/
+Disallow: /account/
+Disallow: /admin/
 
 Sitemap: https://buildario.studio/sitemap.xml

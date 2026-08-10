@@ -792,8 +792,95 @@ h2 {
   max-width: 520px;
   margin: 0 auto 44px;
 }
-.cta-actions { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
 .cta .btn { padding: 18px 32px; }
+
+/* --- Brief form ---------------------------------------------------------
+   Deliberately restated here rather than pulled in from app/app.css: the
+   dashboards' stylesheet is a second request that every visitor to the home
+   page would pay for, and only these few controls are shared. */
+
+.contact-form {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 56px auto 0;
+  padding: 32px;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+}
+
+.contact-form .field { margin-bottom: 18px; }
+.contact-form .field:last-of-type { margin-bottom: 24px; }
+
+.contact-form label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 15px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.contact-form textarea { min-height: 130px; resize: vertical; }
+.contact-form input::placeholder,
+.contact-form textarea::placeholder { color: rgba(255, 255, 255, 0.32); }
+
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(79, 140, 255, 0.18);
+}
+
+.contact-form .field-row {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.contact-form .btn { width: 100%; justify-content: center; }
+.contact-form .btn[disabled] { opacity: 0.6; cursor: not-allowed; }
+
+/* Bot bait: a real person never fills a field they cannot see, so anything
+   arriving with this set is dropped before it reaches the database. */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form-msg {
+  margin: 0 0 18px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.45;
+  text-align: left;
+}
+.form-msg-error   { background: rgba(255, 86, 86, 0.12);  border: 1px solid rgba(255, 86, 86, 0.3);  color: #ffb4b4; }
+.form-msg-success { background: rgba(56, 200, 130, 0.12); border: 1px solid rgba(56, 200, 130, 0.3); color: #86f0bd; }
+.form-msg-info    { background: var(--fill);              border: 1px solid var(--line);            color: var(--muted); }
+
+.contact-alt { margin: 22px auto 0; font-size: 14px; color: var(--muted); }
+.muted { color: var(--muted); }
 
 /* ==========================================================================
    Footer

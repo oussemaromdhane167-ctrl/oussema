@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Project — Buildario</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#090909">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../app/app.css">
+</head>
+<body class="app">
+
+<header class="app-bar">
+  <a class="brand" href="../">Buildario</a>
+  <div class="app-bar-spacer"></div>
+  <nav class="app-bar-links" aria-label="Account">
+    <a href="./" aria-current="page">Dashboard</a>
+    <a href="#settings">Settings</a>
+    <a href="../admin/" id="adminLink" hidden>Admin</a>
+  </nav>
+  <div class="app-user">
+    <span id="userName">…</span>
+    <span class="avatar" id="userAvatar" aria-hidden="true"></span>
+    <button type="button" class="btn btn-quiet" id="signOut">Sign out</button>
+  </div>
+</header>
+
+<main class="app-main">
+
+  <div class="app-head">
+    <div>
+      <h1>Your project</h1>
+      <p id="greeting">Loading your workspace…</p>
+    </div>
+  </div>
+
+  <p class="form-msg" id="pageMsg" hidden></p>
+
+  <div class="cols cols-side">
+
+    <aside>
+      <div class="panel">
+        <div class="panel-head"><h2>Projects</h2></div>
+        <div class="row-list" id="projectList"><p class="empty">Loading…</p></div>
+      </div>
+    </aside>
+
+    <div>
+      <!-- ===== No projects yet ===== -->
+      <div class="panel" id="noProjects" hidden>
+        <div class="panel-head"><h2>Nothing here yet</h2></div>
+        <p class="muted">Your account is live, but no project has been set up on it yet.
+           Once we agree scope, your project appears here with its timeline, files, and a direct thread to me.</p>
+        <p style="margin-top:18px"><a class="btn btn-outline" href="../#contact">Send a brief</a></p>
+      </div>
+
+      <!-- ===== Selected project ===== -->
+      <div id="projectPane" hidden>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2 id="projectTitle">—</h2>
+            <div class="spacer"></div>
+            <span class="pill" id="projectStatus">—</span>
+          </div>
+
+          <p class="muted" id="projectSummary"></p>
+
+          <div style="margin:22px 0 8px">
+            <div class="field-label">Progress · <span id="progressValue">0%</span></div>
+            <div class="progress"><span id="progressBar" style="width:0%"></span></div>
+          </div>
+
+          <div class="field-row" style="margin-top:22px">
+            <div><div class="field-label">Started</div><div id="metaStarted">—</div></div>
+            <div><div class="field-label">Target launch</div><div id="metaTarget">—</div></div>
+            <div><div class="field-label">Budget</div><div id="metaBudget">—</div></div>
+            <div><div class="field-label">Live URL</div><div id="metaLive">—</div></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>Timeline</h2></div>
+          <div class="timeline" id="timeline"><p class="empty">No updates posted yet.</p></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Files</h2>
+            <div class="spacer"></div>
+            <span class="muted small">25 MB per file</span>
+          </div>
+
+          <label class="dropzone" id="dropzone">
+            Drop a file here, or click to choose one
+            <input type="file" id="fileInput">
+          </label>
+
+          <div class="row-list" id="fileList" style="margin-top:16px"><p class="empty">No files yet.</p></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>Messages</h2></div>
+
+          <div class="thread" id="thread"><p class="empty">No messages yet — say hello.</p></div>
+
+          <form class="composer" id="composer">
+            <div class="field" style="flex:1;margin:0">
+              <label class="field-label" for="messageBody">Message</label>
+              <textarea id="messageBody" rows="2" placeholder="Ask a question, or send feedback…" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" id="sendMessage">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Settings ===== -->
+  <section class="panel" id="settings" style="margin-top:24px">
+    <div class="panel-head"><h2>Account settings</h2></div>
+
+    <div class="cols cols-2">
+      <form id="profileForm" novalidate>
+        <p class="form-msg" id="profileMsg" hidden></p>
+
+        <div class="field">
+          <label for="profileName">Full name</label>
+          <input type="text" id="profileName" autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="profileCompany">Company</label>
+          <input type="text" id="profileCompany" autocomplete="organization">
+        </div>
+        <div class="field">
+          <label for="profileEmail">Email</label>
+          <input type="email" id="profileEmail" disabled>
+          <p class="muted small" style="margin-top:6px">Email changes go through me — just send a message.</p>
+        </div>
+        <div class="field">
+          <label class="dropzone" for="avatarInput" style="padding:14px">
+            Change profile picture
+            <input type="file" id="avatarInput" accept="image/png,image/jpeg,image/webp">
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="profileSubmit">Save changes</button>
+      </form>
+
+      <form id="passwordForm" novalidate>
+        <p class="form-msg" id="passwordMsg" hidden></p>
+
+        <div class="field">
+          <label for="newPassword">New password</label>
+          <input type="password" id="newPassword" autocomplete="new-password" minlength="8">
+        </div>
+        <div class="field">
+          <label for="confirmPassword">Confirm new password</label>
+          <input type="password" id="confirmPassword" autocomplete="new-password" minlength="8">
+        </div>
+
+        <button type="submit" class="btn btn-outline" id="passwordSubmit">Update password</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<script src="../app/config.js"></script>
+<script type="module" src="../app/pages/account.js"></script>
+</body>
+</html>

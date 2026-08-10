@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client Login — Buildario</title>
+<meta name="description" content="Sign in to your Buildario client area to follow your project, message the studio, and share files.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#090909">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../app/app.css">
+</head>
+<body class="app">
+
+<header class="app-bar">
+  <a class="brand" href="../">Buildario</a>
+  <div class="app-bar-spacer"></div>
+  <nav class="app-bar-links" aria-label="Site">
+    <a href="../">Back to site</a>
+  </nav>
+</header>
+
+<main class="auth-wrap">
+  <div class="auth-card">
+
+    <!-- ===== Sign in / sign up ===== -->
+    <section id="viewAuth">
+      <div class="tabs" role="tablist" aria-label="Account">
+        <button type="button" class="tab" id="tabSignin" role="tab" aria-selected="true" aria-controls="formSignin">Sign in</button>
+        <button type="button" class="tab" id="tabSignup" role="tab" aria-selected="false" aria-controls="formSignup">Create account</button>
+      </div>
+
+      <form id="formSignin" role="tabpanel" aria-labelledby="tabSignin" novalidate>
+        <h1>Welcome back.</h1>
+        <p>Your project, updates, and files — all in one place.</p>
+
+        <p class="form-msg" id="signinMsg" hidden></p>
+
+        <div class="field">
+          <label for="signinEmail">Email</label>
+          <input type="email" id="signinEmail" name="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="signinPassword">Password</label>
+          <input type="password" id="signinPassword" name="password" autocomplete="current-password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="signinSubmit">Sign in</button>
+
+        <p class="auth-alt"><button type="button" id="linkForgot">Forgot your password?</button></p>
+      </form>
+
+      <form id="formSignup" role="tabpanel" aria-labelledby="tabSignup" novalidate hidden>
+        <h1>Create your account.</h1>
+        <p>For clients with a project in flight. Starting fresh? <a href="../#contact">Send a brief first</a>.</p>
+
+        <p class="form-msg" id="signupMsg" hidden></p>
+
+        <div class="field">
+          <label for="signupName">Full name</label>
+          <input type="text" id="signupName" name="full_name" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="signupCompany">Company <span class="muted small">(optional)</span></label>
+          <input type="text" id="signupCompany" name="company" autocomplete="organization">
+        </div>
+        <div class="field">
+          <label for="signupEmail">Email</label>
+          <input type="email" id="signupEmail" name="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="signupPassword">Password <span class="muted small">(8 characters or more)</span></label>
+          <input type="password" id="signupPassword" name="password" autocomplete="new-password" minlength="8" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="signupSubmit">Create account</button>
+      </form>
+    </section>
+
+    <!-- ===== Password reset request ===== -->
+    <section id="viewForgot" hidden>
+      <h1>Reset your password.</h1>
+      <p>Enter your email and I'll send you a link.</p>
+
+      <form id="formForgot" novalidate>
+        <p class="form-msg" id="forgotMsg" hidden></p>
+
+        <div class="field">
+          <label for="forgotEmail">Email</label>
+          <input type="email" id="forgotEmail" name="email" autocomplete="email" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="forgotSubmit">Send reset link</button>
+      </form>
+
+      <p class="auth-alt"><button type="button" id="linkBackToSignin">Back to sign in</button></p>
+    </section>
+
+    <!-- ===== New password (arrived from the emailed recovery link) ===== -->
+    <section id="viewRecovery" hidden>
+      <h1>Choose a new password.</h1>
+      <p>You are signed in from the emailed link. Set a new password to finish.</p>
+
+      <form id="formRecovery" novalidate>
+        <p class="form-msg" id="recoveryMsg" hidden></p>
+
+        <div class="field">
+          <label for="recoveryPassword">New password</label>
+          <input type="password" id="recoveryPassword" name="password" autocomplete="new-password" minlength="8" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="recoverySubmit">Save password</button>
+      </form>
+    </section>
+
+  </div>
+</main>
+
+<script src="../app/config.js"></script>
+<script type="module" src="../app/pages/login.js"></script>
+</body>
+</html>

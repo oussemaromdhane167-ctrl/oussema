@@ -93,6 +93,9 @@ const scrollBar = $('#scrollBar');
 const navLinks = $$('.nav-link');
 
 const spyTargets = navLinks
+  // the client-login link rides in the same list; `login/` is not a selector,
+  // and handing it to querySelector throws and takes the whole script with it
+  .filter((link) => (link.getAttribute('href') || '').startsWith('#'))
   .map((link) => ({ link, el: $(link.getAttribute('href')) }))
   .filter((t) => t.el);
 
@@ -296,6 +299,96 @@ if (navToggle && navPanel && navScrim) {
   // leaving the drawer breakpoint must not strand the page in the open state
   const wide = matchMedia('(min-width: 901px)');
   wide.addEventListener('change', (e) => { if (e.matches) setDrawer(false); });
+}
+
+/* ======================================================================
+   8. BRIEF FORM
+
+   Posts straight to Supabase over PostgREST rather than through the JS SDK:
+   this file is a classic script that also has to run from file://, and the one
+   call it makes is a single RPC. The function it targets, submit_lead, is the
+   only write the anon key is allowed anywhere in the database.
+   ====================================================================== */
+
+const briefForm = $('#briefForm');
+
+if (briefForm) {
+  const briefMsg = $('#briefMsg');
+  const briefSubmit = $('#briefSubmit');
+  const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+  const say = (text, kind) => {
+    briefMsg.textContent = text;
+    briefMsg.className = 'form-msg form-msg-' + kind;
+    briefMsg.hidden = !text;
+  };
+
+  briefForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    say('', 'info');
+
+    // honeypot: report success, write nothing
+    if ($('#briefWebsite').value.trim()) {
+      briefForm.reset();
+      say('Thanks — your brief is in. I reply to everything within a day or two.', 'success');
+      return;
+    }
+
+    const payload = {
+      p_name: $('#briefName').value.trim(),
+      p_email: $('#briefEmail').value.trim(),
+      p_message: $('#briefMessage').value.trim(),
+      p_company: $('#briefCompany').value.trim() || null,
+      p_budget: $('#briefBudget').value || null,
+      p_source: 'website'
+    };
+
+    if (payload.p_name.length < 2)        return say('Please enter your name.', 'error');
+    if (!EMAIL_RE.test(payload.p_email))  return say('Please enter a valid email address.', 'error');
+    if (payload.p_message.length < 10)    return say('Please describe your project in a little more detail.', 'error');
+
+    const config = window.BUILDARIO_SUPABASE || {};
+    if (!config.configured) {
+      say('The form is not connected yet — email hello@buildario.studio and it will reach me just the same.', 'info');
+      return;
+    }
+
+    const label = briefSubmit.innerHTML;
+    briefSubmit.disabled = true;
+    briefSubmit.textContent = 'Sending…';
+
+    try {
+      const response = await fetch(config.url + '/rest/v1/rpc/submit_lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: config.anonKey,
+          Authorization: 'Bearer ' + config.anonKey
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        // submit_lead raises with a message written for a human; surface it
+        let detail = '';
+        try { detail = (await response.json()).message || ''; } catch (_) { /* non-JSON error body */ }
+        throw new Error(detail || 'Something went wrong sending that. Try again in a moment.');
+      }
+
+      briefForm.reset();
+      say('Thanks — your brief is in. I reply to everything within a day or two.', 'success');
+    } catch (error) {
+      say(
+        /failed to fetch|networkerror/i.test(error.message)
+          ? 'Could not reach the server. Check your connection, or email hello@buildario.studio.'
+          : error.message,
+        'error'
+      );
+    } finally {
+      briefSubmit.disabled = false;
+      briefSubmit.innerHTML = label;
+    }
+  });
 }
 
 /* Tells the failsafe watchdog in index.html that the motion layer booted. If
