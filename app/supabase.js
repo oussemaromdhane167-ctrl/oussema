@@ -55,6 +55,13 @@ export function friendlyError(error) {
   if (/row-level security|permission denied|42501/i.test(message)) {
     return 'You do not have access to that.';
   }
+  // Two different limits wear similar words. The email one is measured in
+  // hours and is nothing the visitor did wrong, so it must not read as a
+  // telling-off or send them to retry in sixty seconds.
+  if (/email rate limit/i.test(message)) {
+    return 'The confirmation email could not be sent right now — a sending limit was reached. ' +
+           'Email buildario.studio@gmail.com and I will set your account up directly.';
+  }
   if (/too many requests|rate limit/i.test(message)) {
     return 'Too many attempts in a row. Wait a minute and try again.';
   }

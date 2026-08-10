@@ -45,6 +45,12 @@ $$;
 -- Self-heal path. `role = 'client'` in the check is what keeps this from being
 -- a way to mint an admin: the row can only be created at the lowest privilege,
 -- and profiles_guard_columns still rejects any later self-promotion.
+--
+-- Dropped first so the file can be re-run: the SQL editor executes a script as
+-- one transaction, and a duplicate-policy error rolls back the function
+-- replacement above it too.
+drop policy if exists "a user may create their own profile row" on public.profiles;
+
 create policy "a user may create their own profile row"
 on public.profiles for insert to authenticated
 with check (
