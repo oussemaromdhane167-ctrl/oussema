@@ -312,15 +312,51 @@ if (navToggle && navPanel && navScrim) {
 
 const STUDIO_EMAIL = 'buildario.studio@gmail.com';
 
-/* The client area only exists once the database is reachable. Until then both
-   entrances stay hidden rather than leading to a sign-in that cannot work. */
+/* The client area only exists once the database is reachable — and `configured`
+   alone cannot tell us that. It only says the placeholders in config.js were
+   replaced, which stays true after a project is paused, deleted, or renamed;
+   the keys keep their shape long after they stop addressing anything. Gating on
+   it by itself once left a Client Login in the nav pointing at a project that no
+   longer resolved.
+   So ask the server. GoTrue's /health needs no key and answers in one small
+   round trip, cached per session so this costs one request per visit. Failure of
+   any kind — DNS, offline, 5xx, timeout — leaves both entrances hidden, because
+   a sign-in that cannot sign anyone in is worse than no link at all. */
 const config = window.BUILDARIO_SUPABASE || {};
-if (config.configured) {
+
+const revealClientArea = () => {
   const loginLink = $('#clientLogin');
   const loginAlt = $('#clientLoginAlt');
   if (loginLink) loginLink.hidden = false;
   if (loginAlt) loginAlt.hidden = false;
-}
+};
+
+const BACKEND_PROBE_KEY = 'buildario:backend-live';
+
+const backendIsLive = async () => {
+  if (!config.configured) return false;
+
+  try {
+    if (sessionStorage.getItem(BACKEND_PROBE_KEY) === 'yes') return true;
+  } catch { /* private mode — just probe again */ }
+
+  // Don't let a hanging request hold the link back indefinitely.
+  const abort = new AbortController();
+  const timer = setTimeout(() => abort.abort(), 4000);
+
+  try {
+    const res = await fetch(config.url + '/auth/v1/health', { signal: abort.signal });
+    if (!res.ok) return false;
+    try { sessionStorage.setItem(BACKEND_PROBE_KEY, 'yes'); } catch { /* not essential */ }
+    return true;
+  } catch {
+    return false;               // fail closed
+  } finally {
+    clearTimeout(timer);
+  }
+};
+
+backendIsLive().then((live) => { if (live) revealClientArea(); });
 
 const briefForm = $('#briefForm');
 
