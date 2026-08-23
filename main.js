@@ -315,12 +315,13 @@ const STUDIO_EMAIL = 'buildario.studio@gmail.com';
 /* The client area only exists once the database is reachable — and `configured`
    alone cannot tell us that. It only says the placeholders in config.js were
    replaced, which stays true after a project is paused, deleted, or renamed;
-   the keys keep their shape long after they stop addressing anything. Gating on
-   it by itself once left a Client Login in the nav pointing at a project that no
-   longer resolved.
-   So ask the server. GoTrue's /health needs no key and answers in one small
-   round trip, cached per session so this costs one request per visit. Failure of
-   any kind — DNS, offline, 5xx, timeout — leaves both entrances hidden, because
+   the keys keep their shape long after they stop addressing anything, so gating
+   on it alone can advertise a Client Login backed by nothing.
+   So ask the server. GoTrue's /health answers in one small round trip, cached
+   per session so this costs one request per visit. It is key-gated like the rest
+   of the API, so the anon key has to ride along — without it the probe draws a
+   401 and fails closed against a project that is perfectly alive. Any genuine
+   failure — DNS, offline, 5xx, timeout — leaves both entrances hidden, because
    a sign-in that cannot sign anyone in is worse than no link at all. */
 const config = window.BUILDARIO_SUPABASE || {};
 
@@ -345,7 +346,10 @@ const backendIsLive = async () => {
   const timer = setTimeout(() => abort.abort(), 4000);
 
   try {
-    const res = await fetch(config.url + '/auth/v1/health', { signal: abort.signal });
+    const res = await fetch(config.url + '/auth/v1/health', {
+      headers: { apikey: config.anonKey },
+      signal: abort.signal
+    });
     if (!res.ok) return false;
     try { sessionStorage.setItem(BACKEND_PROBE_KEY, 'yes'); } catch { /* not essential */ }
     return true;
