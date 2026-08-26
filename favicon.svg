@@ -1,12 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Buildario">
-  <!-- "Notch" — a frame that has shipped a module out of its corner.
-       Geometry from the Buildario Logo Concepts brief (concept 04), drawn on a
-       48-unit grid and mapped into this 64-unit tile: scale 1.0556, offset
-       6.667, so the mark spans 13..51 with even padding on all sides.
-       Inks are the brief's dark-surface pair, not its light-ground pair: this
-       tile is #090909, and the detached module is only ~2.5px at a 16px
-       favicon, so it needs the lighter purple to stay legible. -->
-  <rect width="64" height="64" rx="14" fill="#090909"/>
-  <path d="M26.72 13 H51 V51 H13 V26.72 H26.72 Z" fill="#5B8CF5"/>
-  <rect x="13" y="13" width="10.56" height="10.56" rx="1.06" fill="#A78BFA"/>
+  <!-- The profile mark: two interlocking brackets, the second the first rotated
+       180deg about the tile centre. Geometry traced pixel-for-pixel from
+       buildario-profile-charcoal-1024.png (mark spans 302..721 on a 1024 grid)
+       and remapped to span 13..51 here, so the mark fills the favicon instead of
+       carrying the profile picture's circular-crop padding.
+       The 2.26-unit gap between the pieces is sub-pixel at 16px; the white/purple
+       edge is what separates them at tab size, which is why the inks stay as the
+       profile has them rather than being lightened. -->
+  <rect width="64" height="64" rx="14" fill="#141317"/>
+  <path d="M13 13 H37.16 V24.49 H24.49 V50.91 H13 Z" fill="#FFFFFF"/>
+  <path d="M39.42 13 H50.91 V50.91 H26.75 V39.42 H39.42 Z" fill="#7C3AED"/>
 </svg>
