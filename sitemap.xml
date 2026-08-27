@@ -1,28 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- The portfolio is the deploy root, with the three demos as sibling folders. -->
+<!-- The portfolio is the deploy root, with the three demos as sibling folders.
+     /login/, /account/ and /admin/ are deliberately absent: they are noindex and
+     disallowed in robots.txt, and a sitemap entry would argue with both. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://buildario.studio/</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://buildario.studio/gym/</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://buildario.studio/porsche/</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://buildario.studio/ferrari/</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-08-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://buildario.studio/privacy/</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 </urlset>

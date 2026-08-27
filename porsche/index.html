@@ -5,6 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>911 GT3 RS — Engineered for the Track. Built for the Road.</title>
 <meta name="description" content="Every curve honed in the wind tunnel. Every gram accounted for. The 911 GT3 RS channels four decades of motorsport dominance into the most focused road car ever built.">
+
+<!-- Social cards. The card image is the same shot the portfolio uses for this
+     build, so a shared demo link and the portfolio card show the same thing. -->
+<link rel="canonical" href="https://buildario.studio/porsche/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://buildario.studio/porsche/">
+<meta property="og:site_name" content="Buildario">
+<meta property="og:title" content="911 GT3 RS — Motorsport Launch Page">
+<meta property="og:description" content="An unofficial concept page by Buildario, built as a motion study. Not affiliated with Porsche AG.">
+<meta property="og:image" content="https://buildario.studio/assets/porsche-desktop.jpg">
+<meta property="og:image:width" content="1440">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="The GT3 RS landing page: a bold headline over a full-bleed photograph of a black GT3 RS on track.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="911 GT3 RS — Motorsport Launch Page">
+<meta name="twitter:description" content="An unofficial concept page by Buildario, built as a motion study. Not affiliated with Porsche AG.">
+<meta name="twitter:image" content="https://buildario.studio/assets/porsche-desktop.jpg">
+
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -240,6 +258,9 @@
 
   <div class="footer__bar">
     <span>© 2026 GT3 RS Motors. All rights reserved.</span>
+    <!-- The page borrows a real car and a real marque, so it has to say plainly
+         whose it is not. Sits with the copyright rather than in a corner. -->
+    <span class="footer__disclaimer">Unofficial concept page built as a motion study. Not affiliated with, endorsed by, or connected to Dr. Ing. h.c. F. Porsche AG. Porsche, 911 and GT3 RS are trademarks of their owner.</span>
     <div class="footer__legal">
       <a href="#" data-cursor="link">Privacy</a>
       <a href="#" data-cursor="link">Terms</a>
@@ -260,5 +281,71 @@
 </div>
 
 <script src="main.js"></script>
+
+<!-- ===== Return bar =====================================================
+     Injected on every demo so the page is never a dead end: these builds are
+     reached from buildario.studio in the same tab, and without this the only
+     way back is the browser Back button. Self-contained on purpose — its own
+     styles, its own class prefix, no dependency on this demo's sheet, so it
+     survives any restyle of the page it sits on. ==================== -->
+<style>
+  .bd-return {
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    /* above this demo's lightbox/overlays, below its preloader and cursor */
+    z-index: 2500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: calc(100vw - 32px);
+    padding: 8px 14px 8px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(12, 12, 12, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 12px;
+    line-height: 1.35;
+    color: rgba(255, 255, 255, 0.62);
+  }
+  .bd-return a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    /* 32px tall inside a 36px row: comfortably past the 24px target minimum
+       without turning the bar into a button the page has to design around */
+    min-height: 32px;
+    padding: 0 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+  .bd-return a:hover { background: rgba(79, 140, 255, 0.9); color: #fff; }
+  .bd-return a:focus-visible { outline: 2px solid #4f8cff; outline-offset: 3px; }
+  .bd-return-note { display: block; }
+
+  /* Below this the note would wrap to three lines and cover the page it is
+     annotating. The link stays; the disclaimer moves to the footer copy. */
+  @media (max-width: 560px) {
+    .bd-return { left: 12px; bottom: 12px; padding: 6px; }
+    .bd-return-note { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bd-return a { transition: none; }
+  }
+</style>
+
+<div class="bd-return">
+  <a href="../" aria-label="Back to the Buildario portfolio"><span aria-hidden="true">&larr;</span> Buildario</a>
+  <span class="bd-return-note">Unofficial concept — not affiliated with or endorsed by Porsche AG.</span>
+</div>
 </body>
 </html>

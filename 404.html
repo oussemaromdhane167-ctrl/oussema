@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found — Buildario</title>
+<meta name="description" content="That page does not exist on buildario.studio. Head back to the portfolio or jump straight to the work.">
+<!-- A 404 that gets indexed is a 404 that shows up in results. -->
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#090909">
+
+<!-- Absolute, not relative: GitHub Pages serves this same file for a miss at
+     any depth (/nope, /gym/nope/deeper), and a relative href would resolve
+     against whatever path the visitor mistyped. -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/app/app.css">
+<style>
+  .err-wrap { min-height: calc(100vh - 74px); display: grid; place-items: center; padding: 48px var(--gutter); }
+  .err { width: 100%; max-width: 560px; text-align: center; }
+  .err-code {
+    font-size: clamp(72px, 18vw, 132px);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 1;
+    background: linear-gradient(120deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .err h1 { font-size: clamp(24px, 5vw, 32px); font-weight: 800; letter-spacing: -0.02em; margin: 18px 0 12px; }
+  .err p { color: var(--muted); font-size: 16px; line-height: 1.65; margin: 0 auto 32px; max-width: 44ch; }
+  .err-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .err-links { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--line); }
+  .err-links p { font-size: 13px; margin-bottom: 14px; }
+  .err-links nav { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+  .err-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 0 14px;
+    border-radius: 999px;
+    background: var(--fill);
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .err-links a:hover, .err-links a:focus-visible { color: var(--text); }
+  @media (max-width: 680px) { .err-actions .btn { width: 100%; } }
+</style>
+</head>
+<body class="app">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="app-bar">
+  <a class="brand" href="/">Buildario</a>
+  <div class="app-bar-spacer"></div>
+  <nav class="app-bar-links" aria-label="Site">
+    <a href="/">Back to site</a>
+  </nav>
+</header>
+
+<main class="err-wrap" id="main">
+  <div class="err">
+    <p class="err-code" aria-hidden="true">404</p>
+    <h1>This page doesn't exist.</h1>
+    <p>The link is wrong, or the page moved. Nothing here is broken on your end — everything below still works.</p>
+
+    <div class="err-actions">
+      <a href="/" class="btn btn-primary">Back to the portfolio <span aria-hidden="true">&rarr;</span></a>
+      <a href="/#contact" class="btn btn-ghost">Start a project</a>
+    </div>
+
+    <div class="err-links">
+      <p>Or jump straight to a build:</p>
+      <nav aria-label="Project demos">
+        <a href="/gym/">FORGE</a>
+        <a href="/porsche/">911 GT3 RS</a>
+        <a href="/ferrari/">Ferrari</a>
+        <a href="/#work">All work</a>
+      </nav>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

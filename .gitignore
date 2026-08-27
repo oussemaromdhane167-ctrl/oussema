@@ -1,0 +1,23 @@
+# This repo IS the deploy root — GitHub Pages serves every committed file at
+# buildario.studio/<path>. So anything ignored here is also, deliberately, not
+# published. Keep that in mind before removing a line.
+
+# Local preview server used for testing. Not part of the site.
+.claude-serve.js
+.claude/
+
+# OS and editor droppings
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.idea/
+.vscode/
+
+# Source material and working files: these are not part of the page, and
+# anything committed to the root is downloadable by anyone who guesses the URL.
+*.zip
+
+# Dependencies, if a build ever gets added here
+node_modules/

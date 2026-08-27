@@ -6,6 +6,24 @@
 <title>Ferrari — Engineering emotion</title>
 <meta name="description" content="A concept landing page for Ferrari, printed on the Broadsheet design system: four-colour process separations, misregistered plate headlines and a warm press sheet.">
 <script>document.documentElement.classList.add('js');</script>
+
+<!-- Social cards. The card image is the same shot the portfolio uses for this
+     build, so a shared demo link and the portfolio card show the same thing. -->
+<link rel="canonical" href="https://buildario.studio/ferrari/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://buildario.studio/ferrari/">
+<meta property="og:site_name" content="Buildario">
+<meta property="og:title" content="Ferrari — Engineering Emotion">
+<meta property="og:description" content="An unofficial concept page by Buildario, built on a four-colour print metaphor. Not affiliated with Ferrari S.p.A.">
+<meta property="og:image" content="https://buildario.studio/assets/ferrari-desktop.jpg">
+<meta property="og:image:width" content="1440">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="The Ferrari concept page: the headline Engineering emotion set in misregistered colour plates above a halftoned red SF90.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ferrari — Engineering Emotion">
+<meta name="twitter:description" content="An unofficial concept page by Buildario, built on a four-colour print metaphor. Not affiliated with Ferrari S.p.A.">
+<meta name="twitter:image" content="https://buildario.studio/assets/ferrari-desktop.jpg">
+
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -420,7 +438,7 @@
   </section>
 
   <footer class="site-foot">
-    <span style="margin-right:auto">Concept landing page — an independent editorial interpretation, not an official communication.</span>
+    <span style="margin-right:auto">Unofficial concept page — an independent editorial interpretation, not affiliated with, endorsed by, or connected to Ferrari S.p.A. Ferrari and the model names are trademarks of their owner.</span>
     <div class="site-foot__social">
       <a href="#top">Instagram</a>
       <a href="#top">YouTube</a>
@@ -463,5 +481,71 @@
 <script src="print-plates.js"></script>
 <script src="assets/vendor/anime.umd.min.js"></script>
 <script src="main.js"></script>
+
+<!-- ===== Return bar =====================================================
+     Injected on every demo so the page is never a dead end: these builds are
+     reached from buildario.studio in the same tab, and without this the only
+     way back is the browser Back button. Self-contained on purpose — its own
+     styles, its own class prefix, no dependency on this demo's sheet, so it
+     survives any restyle of the page it sits on. ==================== -->
+<style>
+  .bd-return {
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    /* above this demo's lightbox/overlays, below its preloader and cursor */
+    z-index: 2500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: calc(100vw - 32px);
+    padding: 8px 14px 8px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(12, 12, 12, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 12px;
+    line-height: 1.35;
+    color: rgba(255, 255, 255, 0.62);
+  }
+  .bd-return a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    /* 32px tall inside a 36px row: comfortably past the 24px target minimum
+       without turning the bar into a button the page has to design around */
+    min-height: 32px;
+    padding: 0 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+  .bd-return a:hover { background: rgba(79, 140, 255, 0.9); color: #fff; }
+  .bd-return a:focus-visible { outline: 2px solid #4f8cff; outline-offset: 3px; }
+  .bd-return-note { display: block; }
+
+  /* Below this the note would wrap to three lines and cover the page it is
+     annotating. The link stays; the disclaimer moves to the footer copy. */
+  @media (max-width: 560px) {
+    .bd-return { left: 12px; bottom: 12px; padding: 6px; }
+    .bd-return-note { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bd-return a { transition: none; }
+  }
+</style>
+
+<div class="bd-return">
+  <a href="../" aria-label="Back to the Buildario portfolio"><span aria-hidden="true">&larr;</span> Buildario</a>
+  <span class="bd-return-note">Unofficial concept — not affiliated with or endorsed by Ferrari S.p.A.</span>
+</div>
 </body>
 </html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy — Buildario</title>
+<meta name="description" content="What Buildario collects, why, where it is stored, and how to have it deleted. Short version: a contact form, cookieless analytics, and nothing sold to anyone.">
+<link rel="canonical" href="https://buildario.studio/privacy/">
+<meta name="theme-color" content="#090909">
+
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../app/app.css">
+<style>
+  .prose-wrap { padding: 56px var(--gutter) 96px; }
+  .prose { max-width: 68ch; margin: 0 auto; }
+  .prose h1 { font-size: clamp(30px, 6vw, 42px); font-weight: 800; letter-spacing: -0.03em; }
+  .prose .updated { color: var(--muted); font-size: 14px; margin-top: 10px; }
+  .prose .summary {
+    margin: 32px 0 8px;
+    padding: 20px 22px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .prose h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; margin: 44px 0 14px; }
+  .prose p, .prose li { color: var(--muted); font-size: 15px; line-height: 1.75; }
+  .prose p { margin-bottom: 14px; }
+  .prose ul { margin: 0 0 14px; padding-left: 0; }
+  .prose li { position: relative; padding-left: 20px; margin-bottom: 8px; }
+  .prose li::before { content: ""; position: absolute; left: 4px; top: 10px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+  .prose a { color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px; }
+  .prose strong { color: var(--text); font-weight: 600; }
+  .prose .foot { margin-top: 52px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 14px; }
+</style>
+</head>
+<body class="app">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="app-bar">
+  <a class="brand" href="../">Buildario</a>
+  <div class="app-bar-spacer"></div>
+  <nav class="app-bar-links" aria-label="Site">
+    <a href="../">Back to site</a>
+  </nav>
+</header>
+
+<main class="prose-wrap" id="main">
+  <article class="prose">
+    <h1>Privacy</h1>
+    <p class="updated">Last updated 27 August 2026</p>
+
+    <p class="summary">Buildario is one person, not a company with a data department. The site
+      collects what you type into the contact form, counts page views without cookies, and stores
+      client account data for people who have a project running. Nothing is sold, rented, or handed
+      to advertisers. Ask and it gets deleted.</p>
+
+    <h2>Who is responsible</h2>
+    <p>This site is run by the individual behind Buildario Studio, based in Tunisia. For anything on
+      this page, including deletion requests, write to
+      <a href="mailto:buildario.studio@gmail.com">buildario.studio@gmail.com</a>.</p>
+
+    <h2>The contact form</h2>
+    <p>When you send a brief, the form stores exactly the fields it shows you: <strong>your name,
+      email address, optional company, the budget range you picked, and your message</strong>. It
+      also records the time it arrived and a note that it came from the website.</p>
+    <p>This exists so a project enquiry can be answered — nothing else. It is not added to a mailing
+      list and you will not get marketing from it. If the database is unreachable when you submit,
+      the page instead opens a draft in your own mail app, which sends nothing until you press send.</p>
+
+    <h2>Client accounts</h2>
+    <p>If you have a project running and sign in to the client area, the account holds your
+      <strong>email address, name, optional company, and the project material you and I exchange</strong>
+      — updates, messages, and any files uploaded to the project. Passwords are handled by Supabase
+      Auth and stored hashed; they are never visible to me.</p>
+
+    <h2>Analytics</h2>
+    <p>Page views are counted with <a href="https://plausible.io/privacy" target="_blank" rel="noopener noreferrer">Plausible</a>,
+      which is cookieless and stores nothing on your device. It reports aggregate numbers — pages,
+      referrers, country, broad device type — and does not build a profile of you or follow you to
+      other sites. Because it sets no cookies and stores no identifiers, this site has no cookie
+      banner. If you block it, nothing on the page changes.</p>
+
+    <h2>Where it is stored, and who else can see it</h2>
+    <ul>
+      <li><strong>Supabase</strong> hosts the database and authentication for the form and client area.</li>
+      <li><strong>Plausible</strong> receives the anonymous page-view events described above.</li>
+      <li><strong>GitHub Pages</strong> serves this site and, like any web server, logs requests.</li>
+      <li><strong>Google Fonts</strong> serves the typeface, so your browser requests files from Google when the page loads.</li>
+    </ul>
+    <p>Those four are the entire list. No advertising networks, no data brokers, no tracking pixels,
+      no third party is sent your enquiry.</p>
+
+    <h2>How long it is kept</h2>
+    <p>Enquiries are kept while they might still lead somewhere and are cleared out once they clearly
+      will not. Client project data is kept for as long as the project is live and for a reasonable
+      period afterwards, so past work can be referred back to. Either can be deleted sooner if you
+      ask.</p>
+
+    <h2>What you can ask for</h2>
+    <p>Email <a href="mailto:buildario.studio@gmail.com">buildario.studio@gmail.com</a> and you can
+      have a copy of what is held about you, have it corrected, or have it deleted. There is no form
+      to fill in and no charge. Expect a reply within a few days.</p>
+
+    <h2>Children</h2>
+    <p>This is a service for businesses and professionals. It is not directed at children and no
+      information is knowingly collected from them.</p>
+
+    <h2>Changes</h2>
+    <p>If what the site collects changes, this page changes with it and the date at the top moves.</p>
+
+    <p class="foot"><a href="../">&larr; Back to the portfolio</a></p>
+  </article>
+</main>
+
+</body>
+</html>

@@ -369,10 +369,39 @@ if (briefForm) {
   const briefSubmit = $('#briefSubmit');
   const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
-  const say = (text, kind) => {
+  /* Every field the validator can reject, so a new error never leaves an
+     aria-invalid behind on a field the visitor has since fixed. */
+  const VALIDATED = ['#briefName', '#briefEmail', '#briefMessage'];
+
+  /**
+   * @param {string} text     message to show; empty clears the region
+   * @param {string} kind     error | success | info
+   * @param {string} [field]  selector of the input the message is about. Given
+   *                          one, it is marked invalid, pointed at the message
+   *                          for its description, and focused — without this a
+   *                          screen reader hears the error but is left at the
+   *                          submit button with no idea which field to fix.
+   */
+  const say = (text, kind, field) => {
     briefMsg.textContent = text;
     briefMsg.className = 'form-msg form-msg-' + kind;
     briefMsg.hidden = !text;
+
+    VALIDATED.forEach((sel) => {
+      const el = $(sel);
+      if (!el) return;
+      el.removeAttribute('aria-invalid');
+      el.removeAttribute('aria-describedby');
+    });
+
+    const target = field && $(field);
+    if (!target) return;
+    target.setAttribute('aria-invalid', 'true');
+    target.setAttribute('aria-describedby', 'briefMsg');
+    // A tick after the live region has the text, so the announcement is not cut
+    // off by the focus move landing first. setTimeout rather than rAF: a
+    // backgrounded tab stops producing frames, and focus should not wait on one.
+    setTimeout(() => target.focus(), 0);
   };
 
   /* The budget select carries both a TND and a USD group; the region select
@@ -491,9 +520,9 @@ if (briefForm) {
       p_source: 'website'
     };
 
-    if (payload.p_name.length < 2)        return say('Please enter your name.', 'error');
-    if (!EMAIL_RE.test(payload.p_email))  return say('Please enter a valid email address.', 'error');
-    if (payload.p_message.length < 10)    return say('Please describe your project in a little more detail.', 'error');
+    if (payload.p_name.length < 2)        return say('Please enter your name.', 'error', '#briefName');
+    if (!EMAIL_RE.test(payload.p_email))  return say('Please enter a valid email address.', 'error', '#briefEmail');
+    if (payload.p_message.length < 10)    return say('Please describe your project in a little more detail.', 'error', '#briefMessage');
 
     if (!config.configured) {
       handOffToMail(payload, 'Nearly there.');

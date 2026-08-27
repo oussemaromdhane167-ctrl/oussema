@@ -606,6 +606,9 @@ body.cursor-hidden .cursor,body.cursor-hidden .cursor-ring{opacity:0}
   display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
   font-size:12px;color:var(--fg-40);
 }
+/* Full-width row of its own under the copyright: the flex parent wraps, and a
+   long legal line squeezed beside the links would push them off the row. */
+.footer__disclaimer{flex:0 0 100%;order:3;line-height:1.5;color:var(--fg-40)}
 .footer__legal{display:flex;gap:24px}
 .footer__legal a{color:var(--fg-40)}
 .footer__legal a:hover{color:var(--accent)}

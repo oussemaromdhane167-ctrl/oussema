@@ -58,6 +58,10 @@
 </head>
 <body>
 
+<!-- First stop for a keyboard user: the nav is now brand + three social marks
+     + five links + a CTA before any content, which is a long way to tab. -->
+<a class="skip-link" href="#main">Skip to content</a>
+
 <div class="loader" id="loader" aria-hidden="true"><span>BUILDARIO</span></div>
 
 <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
@@ -66,7 +70,30 @@
 
 <!-- ===== NAV ===== -->
 <nav id="nav">
-  <a class="brand" href="#top">Buildario</a>
+  <!-- Brand and the social row travel together as one left-hand group so the
+       nav stays a two-part flex layout at every width. -->
+  <div class="nav-brand">
+    <a class="brand" href="#top">Buildario</a>
+    <!-- Same three destinations as the footer row, same inline glyphs: three
+         icons used twice each still cost less inline than a sprite request. -->
+    <nav class="nav-social" aria-label="Buildario on social media">
+      <a href="https://www.instagram.com/buildario.studio/" target="_blank" rel="noopener noreferrer" aria-label="Buildario on Instagram">
+        <svg viewBox="-1.5 -1.5 27 27" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38C1.35 2.68.93 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13.67.66 1.34 1.08 2.13 1.38.76.3 1.64.5 2.91.56 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.3 1.46-.72 2.13-1.38.66-.67 1.08-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.3-.79-.72-1.46-1.38-2.13C21.32 1.35 20.65.93 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm7.85-10.41a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0z"/>
+        </svg>
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=61593945805100" target="_blank" rel="noopener noreferrer" aria-label="Buildario on Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.51 1.49-3.9 3.777-3.9 1.094 0 2.239.196 2.239.196v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/>
+        </svg>
+      </a>
+      <a href="https://www.tiktok.com/@buildario.studio" target="_blank" rel="noopener noreferrer" aria-label="Buildario on TikTok">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-1.82-2.47v-3.1a5.69 5.69 0 1 0 4.91 5.63V9.01a7.35 7.35 0 0 0 4.29 1.37V7.3a4.29 4.29 0 0 1-3.23-1.48z"/>
+        </svg>
+      </a>
+    </nav>
+  </div>
 
   <div class="nav-links" id="navLinks">
     <a href="#work" class="nav-link">Work</a>
@@ -89,7 +116,7 @@
 </nav>
 <div class="nav-scrim" id="navScrim" hidden></div>
 
-<main>
+<main id="main" tabindex="-1">
 
 <!-- ===== HERO ===== -->
 <section class="hero" id="top">
@@ -101,7 +128,7 @@
   <div class="hero-copy reveal">
     <p class="badge"><span class="badge-dot" aria-hidden="true"></span>Front-End Design &amp; Development</p>
     <h1>Building Digital Products That People <span class="grad-text">Remember.</span></h1>
-    <p class="hero-sub">I design and build landing pages and interfaces by hand — real-time 3D, scroll-driven motion, and not a framework in sight.</p>
+    <p class="hero-sub">I design and build landing pages and interfaces by hand. The three builds below are real-time 3D and scroll-driven motion, written in plain JavaScript — no framework, no build step.</p>
     <div class="hero-cta">
       <a href="#contact" class="btn btn-primary magnetic">Start a Project <span aria-hidden="true">→</span></a>
       <a href="#work" class="btn btn-ghost magnetic">View My Work</a>
@@ -269,21 +296,21 @@
       <span class="step-n" aria-hidden="true">04</span>
       <div>
         <h3>Development</h3>
-        <p>Production-grade builds with clean architecture and testing.</p>
+        <p>Production-grade builds with clean architecture, checked across browsers and devices.</p>
       </div>
     </li>
     <li class="step reveal">
       <span class="step-n" aria-hidden="true">05</span>
       <div>
         <h3>Launch</h3>
-        <p>A coordinated release with monitoring and rollback plans in place.</p>
+        <p>A coordinated release, with a tested way back to the previous version if anything goes wrong.</p>
       </div>
     </li>
     <li class="step reveal">
       <span class="step-n" aria-hidden="true">06</span>
       <div>
         <h3>Optimization</h3>
-        <p>Ongoing measurement and refinement after launch.</p>
+        <p>Analytics on what visitors actually do, and refinements based on what it shows.</p>
       </div>
     </li>
   </ol>
@@ -292,6 +319,10 @@
 <!-- ===== TOOLKIT ===== -->
 <section class="section toolkit reveal" aria-labelledby="toolkit-h">
   <h2 class="overline" id="toolkit-h">My Toolkit</h2>
+  <!-- Without this line the list reads as a contradiction of the hero. It is
+       not: this is what client work gets built in, the demos are the opposite
+       case, made deliberately without any of it. -->
+  <p class="toolkit-note">What I reach for on client work. The concept builds above deliberately use none of it — that was the point of them.</p>
   <ul class="tech" id="tech">
     <li>Figma</li>
     <li>React</li>
@@ -434,8 +465,20 @@
     <h2>Let's Build Something Extraordinary.</h2>
     <p>Tell me what you're building and I'll tell you honestly whether I'm the right person for it.</p>
 
+    <!-- Submission is a scripted RPC, so with JS off the button would post
+         nowhere and say nothing. Rather than fake a form that cannot send,
+         the noscript path hands over the address directly. -->
+    <noscript>
+      <p class="form-msg form-msg-info" style="display:block">
+        This form needs JavaScript to send. With it off, email the brief straight to
+        <a href="mailto:buildario.studio@gmail.com">buildario.studio@gmail.com</a> — name, what you’re building, and a rough budget is plenty.
+      </p>
+    </noscript>
+
     <form class="contact-form" id="briefForm" novalidate>
-      <p class="form-msg" id="briefMsg" hidden></p>
+      <!-- role=status, not alert: validation messages should be read after the
+           field the visitor is being sent back to takes focus, not interrupt it. -->
+      <p class="form-msg" id="briefMsg" role="status" aria-live="polite" hidden></p>
 
       <div class="field-row">
         <div class="field">
@@ -502,6 +545,13 @@
       <button type="submit" class="btn btn-primary" id="briefSubmit">Send Brief <span aria-hidden="true">→</span></button>
     </form>
 
+    <!-- The page has no testimonials to lean on, so the reassurance has to be a
+         promise that can actually be kept rather than borrowed credibility. -->
+    <p class="contact-promise">
+      You get a straight answer from me, usually within a day or two — including
+      a no, with a reason, if it is not a fit.
+    </p>
+
     <p class="contact-alt">
       Prefer email? <a href="mailto:buildario.studio@gmail.com">buildario.studio@gmail.com</a><span
         id="clientLoginAlt" hidden> · Already a client? <a href="login/">Sign in</a></span>
@@ -523,37 +573,11 @@
       <a href="#process">Process</a>
       <a href="#why">About</a>
       <a href="#contact">Contact</a>
+      <a href="privacy/">Privacy</a>
     </nav>
-    <!-- Icons are inline rather than a font or a sprite: four glyphs used once
-         each, so an extra request or a <use> indirection would cost more than
-         it saves. Each one is a 20px glyph centred in a 44px target, and the
-         accessible name lives on the link — the svg itself is decorative.
-         The Plausible outbound-links build counts these clicks on its own. -->
-    <!-- X is deliberately absent, not forgotten: @buildario there belongs to an
-         unrelated account, and an icon pointing at a stranger is worse than no
-         icon. It goes back in once a handle is claimed and verified. -->
-    <nav class="footer-social" aria-label="Buildario on social media">
-      <a href="https://www.instagram.com/buildario.studio/" target="_blank" rel="noopener noreferrer" aria-label="Buildario on Instagram">
-        <!-- Solid, not stroked. A stroked camera beside filled marks reads
-             visibly lighter at 20px; this keeps the row one weight. The viewBox
-             is padded because this glyph is drawn edge to edge where the others
-             inset themselves — without it Instagram renders about a fifth
-             larger than Facebook. -->
-        <svg viewBox="-1.5 -1.5 27 27" aria-hidden="true" focusable="false">
-          <path fill="currentColor" d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38C1.35 2.68.93 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13.67.66 1.34 1.08 2.13 1.38.76.3 1.64.5 2.91.56 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.3 1.46-.72 2.13-1.38.66-.67 1.08-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.3-.79-.72-1.46-1.38-2.13C21.32 1.35 20.65.93 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm7.85-10.41a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0z"/>
-        </svg>
-      </a>
-      <a href="https://www.facebook.com/profile.php?id=61593945805100" target="_blank" rel="noopener noreferrer" aria-label="Buildario on Facebook">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path fill="currentColor" d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.51 1.49-3.9 3.777-3.9 1.094 0 2.239.196 2.239.196v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.99A10 10 0 0 0 22 12z"/>
-        </svg>
-      </a>
-      <a href="https://www.tiktok.com/@buildario.studio" target="_blank" rel="noopener noreferrer" aria-label="Buildario on TikTok">
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path fill="currentColor" d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 1 1-1.82-2.47v-3.1a5.69 5.69 0 1 0 4.91 5.63V9.01a7.35 7.35 0 0 0 4.29 1.37V7.3a4.29 4.29 0 0 1-3.23-1.48z"/>
-        </svg>
-      </a>
-    </nav>
+    <!-- The social marks live in the header now, beside the wordmark. One set
+         per page: repeating them here just gave the same three links a second
+         home with no extra reach. -->
   </div>
 
   <div class="footer-bottom">
