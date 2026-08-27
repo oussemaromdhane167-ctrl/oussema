@@ -30,6 +30,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+
+<!-- Plausible: ~1.4KB, cookieless and storing nothing on the device, so the page
+     still needs no consent banner. Deferred and entirely optional — if it is
+     blocked, or the domain has not been added at plausible.io yet, nothing on
+     the page changes. -->
+<script defer data-domain="buildario.studio"
+        src="https://plausible.io/js/script.tagged-events.outbound-links.js"></script>
+<script>
+  /* Queue stub. Lets main.js call plausible() before the script has loaded, and
+     keeps that call a harmless no-op if it never loads at all. */
+  window.plausible = window.plausible || function () {
+    (window.plausible.q = window.plausible.q || []).push(arguments);
+  };
+</script>
+
 <script>
   /* Reveal states and the loader overlay only apply when JS is alive. If main.js
      never boots (blocked module, file:// origin, a thrown error), drop the flag
@@ -439,13 +454,34 @@
           <input type="text" id="briefCompany" name="company" autocomplete="organization" maxlength="160">
         </div>
         <div class="field">
+          <label for="briefRegion">Where are you based?</label>
+          <select id="briefRegion" name="region">
+            <option value="tn">Tunisia</option>
+            <option value="intl" selected>Outside Tunisia</option>
+          </select>
+        </div>
+        <div class="field">
           <label for="briefBudget">Budget</label>
+          <!-- Two currencies, because one ceiling cannot serve both markets: a
+               local ceiling reads as junior abroad, and an international floor
+               prices out every business in Tunis. main.js narrows this to the
+               region chosen above; with JS off both groups stay selectable, so
+               the field is never unusable. The submitted value carries its own
+               currency, which is what tells the two apart on arrival. -->
           <select id="briefBudget" name="budget">
             <option value="">Not sure yet</option>
-            <option value="500 TND">500 TND</option>
-            <option value="500 – 1000 TND">500 – 1000 TND</option>
-            <option value="1000 – 1500 TND">1000 – 1500 TND</option>
-            <option value="+1500 TND">+1500 TND</option>
+            <optgroup label="Tunisia (TND)" data-region="tn">
+              <option value="500 TND">500 TND</option>
+              <option value="500 – 1000 TND">500 – 1000 TND</option>
+              <option value="1000 – 1500 TND">1000 – 1500 TND</option>
+              <option value="+1500 TND">+1500 TND</option>
+            </optgroup>
+            <optgroup label="International (USD)" data-region="intl">
+              <option value="Under $1,500">Under $1,500</option>
+              <option value="$1,500 – $3,000">$1,500 – $3,000</option>
+              <option value="$3,000 – $6,000">$3,000 – $6,000</option>
+              <option value="$6,000+">$6,000+</option>
+            </optgroup>
           </select>
         </div>
       </div>

@@ -375,6 +375,36 @@ if (briefForm) {
     briefMsg.hidden = !text;
   };
 
+  /* The budget select carries both a TND and a USD group; the region select
+     narrows it to one. Runs once on load as well, so the default region starts
+     out consistent rather than showing both until the first change. With JS
+     off, neither group is ever disabled and the field stays fully usable. */
+  const briefRegion = $('#briefRegion');
+  const briefBudget = $('#briefBudget');
+
+  if (briefRegion && briefBudget) {
+    const budgetGroups = $$('optgroup[data-region]', briefBudget);
+
+    const applyRegion = () => {
+      budgetGroups.forEach((group) => {
+        const wanted = group.dataset.region === briefRegion.value;
+        // Disabled as well as hidden: a hidden optgroup is still reachable by
+        // keyboard in some browsers, which would let a TND figure be picked
+        // on an international brief.
+        group.hidden = !wanted;
+        group.disabled = !wanted;
+      });
+
+      // Switching region after choosing a figure would otherwise submit the
+      // old currency. Fall back to "Not sure yet" rather than guessing.
+      const picked = briefBudget.selectedOptions[0];
+      if (picked && picked.parentElement.disabled) briefBudget.value = '';
+    };
+
+    briefRegion.addEventListener('change', applyRegion);
+    applyRegion();
+  }
+
   /** The message body, as plain text — both the mail draft and the clipboard
       copy are built from this. */
   const briefText = (payload) => [
@@ -398,6 +428,12 @@ if (briefForm) {
    */
   const handOffToMail = (payload, lead) => {
     const draft = briefText(payload);
+
+    // Tracked separately from a real submission: this path means the brief did
+    // NOT reach the database, and a visitor on webmail may never send the draft
+    // at all. If this event starts outnumbering Brief Submitted, the backend is
+    // the thing to fix — not the funnel.
+    window.plausible('Brief Fell Back To Mail');
 
     window.location.href = 'mailto:' + STUDIO_EMAIL +
       '?subject=' + encodeURIComponent('New brief — ' + payload.p_name) +
@@ -488,6 +524,16 @@ if (briefForm) {
 
       briefForm.reset();
       say('Thanks — your brief is in. I reply to everything within a day or two.', 'success');
+
+      // The one number the growth plan is actually judged on. Region and budget
+      // ride along as properties so the two markets can be read apart; no name,
+      // email or message is ever sent to analytics.
+      window.plausible('Brief Submitted', {
+        props: {
+          region: briefRegion ? briefRegion.value : 'unknown',
+          budget: payload.p_budget || 'unspecified'
+        }
+      });
     } catch (error) {
       // A refusal from submit_lead is written for the visitor — show it. A
       // network failure is not their problem to read about, so hand the brief
