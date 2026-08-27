@@ -199,9 +199,9 @@ main:focus { outline: none; }
 .nav-social a {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   color: var(--muted);
   transition: color 0.25s ease, background 0.25s ease;
 }
@@ -1048,9 +1048,10 @@ footer {
      runs out of room: at ~950px the social marks and the first link overlap.
      Tightening both the link gap and the brand group buys back the width
      without dropping anything from the bar. */
-  .nav-links { gap: 26px; }
-  .nav-brand { gap: 6px; }
-  .nav-social a { width: 32px; height: 32px; }
+  .nav-links { gap: 18px; }
+  .nav-brand { gap: 4px; }
+  .nav-social a { width: 44px; height: 44px; }
+  .nav-social { gap: 0; }
 }
 
 @media (max-width: 900px) {
@@ -1132,10 +1133,19 @@ footer {
   .cta { padding: 100px var(--gutter); }
   .footer-top { flex-direction: column; align-items: flex-start; }
 
-  /* Brand, three marks and the toggle all share one line here. Tightening the
-     group gap keeps the row off the wordmark down to a 320px viewport. */
+  /* Brand, three marks and the toggle all share one line here. */
   .nav-brand { gap: 6px; }
-  .nav-social a { width: 34px; height: 34px; }
+  .nav-social a { width: 44px; height: 44px; }
+}
+
+/* Three 44px targets plus the wordmark plus the toggle is more content than
+   the smallest phones have room for at the 32px side padding used above
+   — they touch by 320px wide. Nothing shrinks below 44px — the icons keep
+   their target size — the row just claims a little more of the edge. */
+@media (max-width: 400px) {
+  #nav { padding-left: 20px; padding-right: 20px; }
+  .nav-brand { gap: 4px; }
+  .nav-social { gap: 0; }
 }
 
 /* ==========================================================================
